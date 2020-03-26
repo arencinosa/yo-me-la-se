@@ -1,0 +1,98 @@
+<div class="container"> 
+    <div class="row">
+        <div class="col-12">
+            ¿Cuántos jugadores tendremos?
+        </div>
+    </div>
+    
+    <div id="game-conf"></div>
+
+    <button 
+        class="btn btn-primary" 
+        onclick="setup()" 
+        style="margin-top: 40px;"
+    >
+        Configurar
+    </button>
+
+    <script>
+        $('game-name').textContent = gameName;
+
+        var g = new Game(gameName, function(gameObj) {
+            gameObj.getCategories().forEach(category => {
+                if (category == '*' || gameObj.getQuestions(category).length == 0) {
+                    return;
+                }
+
+                var container, row, col;
+
+                container = document.createElement('div');
+                container.className = 'container';
+                container.setAttribute('meta-category', category);
+                
+                row = document.createElement('div');
+                row.className = 'row';
+                container.appendChild(row);
+                
+                var ig = document.createElement('div');
+                ig.className = 'input-group';
+                row.appendChild(ig);
+
+                var igpp = document.createElement('div');
+                igpp.className = 'input-group-prepend';
+                ig.appendChild(igpp);
+
+                var label = document.createElement('span');
+                label.className = 'input-group-text';
+                label.textContent = category;
+                igpp.appendChild(label);
+
+                var counter = document.createElement('input');
+                counter.type = 'text';
+                counter.readOnly = true;
+                counter.className = 'form-control-plaintext counter';
+                counter.id = category;
+                counter.value = 0;
+                igpp.appendChild(counter);
+
+                row = document.createElement('div');
+                row.className = 'row';
+                container.appendChild(row);
+
+                var slider = document.createElement('input');
+                slider.type = 'range';
+                slider.min = 0;
+                slider.max = 5;
+                slider.value = 0;
+                slider.addEventListener('input', function(){
+                    $(category).value = slider.value;
+                });
+                row.appendChild(slider);
+
+                $('game-conf').append(container);
+            });
+        });
+
+        function setup() {
+            var counters = document.getElementsByClassName('counter');
+            var players = [];
+            for (var i = 0; i < counters.length; i++) {
+                var elem = counters[i];
+                var value = Number(elem.value);
+                if (value == 0) {
+                    continue;
+                }
+
+                var category = elem.id;
+                for (var j = 0; j < value; j++) {
+                    players.push({
+                        name: category + '-' + (j+1),
+                        category: category
+                    });
+                }
+            }
+            scheduler.init(players);
+            router.goToRoute('game.html');
+        }
+    </script>
+</div>

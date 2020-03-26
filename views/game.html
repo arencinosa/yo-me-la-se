@@ -1,0 +1,195 @@
+<div class="container">
+    <div class="row">
+        <div id="players" class="col-2"></div>
+
+        <div id="board" class="col-7">
+            <button id="ready-btn" onclick="start()" class="btn btn-primary btn-lg bth-block" type="button">¡Listos!</button>
+
+            <div id="stats" class="container d-none">
+                <div class="row">
+                    <div class="col-3 border border-dotted border-success rounded-lg">
+                        <div class="stat-label text-uppercase">
+                            Correctas:
+                        </div>
+                        <div id="right" class="stat-value text-center">0</div>
+                    </div>
+                    
+                    <div class="col-1">
+                        <div id="timer-container">
+                            <div id="timer"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-3 border border-dotted border-danger rounded-lg">
+                        <div class="stat-label text-uppercase">
+                            Incorrectas:
+                        </div>
+                        <div id="wrong" class="stat-value text-center">0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="questionaire" class="jumbotron col-7 d-none">
+                <div>
+                    <svg id="next-btn" onclick="next()" class="bi bi-caret-right-fill d-none" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 011.659-.753l5.48 4.796a1 1 0 010 1.506z"/>
+                    </svg>
+                </div>
+
+                <h2 id='player-name' class="display-4"></h2>
+                <p id="question" class="lead"></p>
+                <hr class="my-4"/>
+                <div id="show-options">
+                    <button type="button" class="btn btn-primary" onclick="showOptions()">Mostrar opciones</button>
+                </div>
+                <div id="options" class="d-none"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function init() {
+            scheduler.players.forEach(player => {
+                var div = document.createElement('div');
+                div.className = 'player badge badge-light';
+                var label = document.createElement('div');
+                label.textContent = player.category;
+                div.appendChild(label);
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.value = player.name;
+                input.addEventListener('input', function(obj) {
+                    var i = obj.target;
+                    player.name = i.value;
+                    if (i.parentNode.classList.contains('active')) {
+                        $('player-name').textContent = i.value;
+                    }
+                });
+                div.appendChild(input);
+                $('players').appendChild(div);
+            });
+        }
+        function updateTimer() {
+            var maxTime = 10;
+            var lapse = (100 - Math.min(100, maxTime*stopwatch.currentTime()/1000));
+            $('timer').style['height'] = lapse + '%';
+            if (lapse == 0) {
+                stopwatch.stop();
+                var btns = document.getElementsByClassName('response');
+                var game = scheduler.currentGame();
+                for(var i = 0; i < btns.length; i++) {
+                    btns[i].disabled = true;
+                    var answerStyle = 'btn-danger';
+                    if (game.checkAnswer(btns[i].textContent)) {
+                        answerStyle = 'btn-success';
+                    }
+                    btns[i].classList.remove('btn-light');
+                    btns[i].classList.add(answerStyle);
+                }
+                var player = scheduler.currentPlayer();
+                player.stats.newWrongAnswer();
+                $('wrong').textContent = player.stats.wrongAnswers;
+                $('next-btn').classList.remove('d-none');
+            }
+            if (stopwatch.status != stopwatch.STOPPED) {
+                setTimeout(updateTimer, 100);
+            }
+        }
+        function showOptions() {
+            $('show-options').classList.add('d-none');
+            $('options').classList.remove('d-none');
+            stopwatch.start();
+            updateTimer();
+        }
+        function checkResponse(btn) {
+            stopwatch.stop();
+            $('next-btn').classList.remove('d-none');
+            
+            var btns = document.getElementsByClassName('response');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].disabled = true;
+            }
+
+            var game = scheduler.currentGame();
+            var player = scheduler.currentPlayer();
+            var answerStyle = 'btn-danger';
+            if (game.checkAnswer(btn.textContent, player.stats)) {
+                answerStyle = 'btn-success';
+            }
+            // btn.className = 'btn response ' + answerStyle;
+            btn.classList.remove('btn-light');
+            btn.classList.add(answerStyle);
+
+            $('right').textContent = player.stats.correctAnswers;
+            $('wrong').textContent = player.stats.wrongAnswers;
+        }
+        function next() {
+            $('next-btn').classList.add('d-none');
+            stopwatch.reset();
+
+            var status = scheduler.next();
+            var pregunta = status.question;
+            if (! pregunta) {
+                alert('se acabó');
+                return;
+            }
+
+            $('show-options').classList.remove('d-none');
+            $('options').classList.add('d-none');
+            $('timer').style['height'] = '0%';
+
+            var playersList = document.getElementsByClassName('player');
+            for (var i = 0; i < playersList.length; i++) {
+                var player = playersList[i];
+                if (i == scheduler.currentPlayerIndex()) {
+                    player.classList.add('active');
+                    player.classList.remove('badge-light');
+                    player.classList.add('badge-secondary');
+                } else {
+                    player.classList.remove('active');
+                    player.classList.remove('badge-secondary');
+                    player.classList.add('badge-light');
+                }
+            }
+            var player = scheduler.currentPlayer();
+            $('right').textContent = player.stats.correctAnswers;
+            $('wrong').textContent = player.stats.wrongAnswers;
+            $('player-name').textContent = player.name;
+
+            $('question').innerHTML = pregunta.p;
+            $('options').innerHTML = '';
+            var columnWidth = Math.floor(12 / pregunta.o.length) - 1;
+            if (columnWidth < 1) {
+                columnWidth = 3;
+            }
+
+            var row = document.createElement('div');
+            row.className = 'row';
+            $('options').appendChild(row);
+            var answers = shuffle(JSON.parse(JSON.stringify(pregunta.o)));
+            for(var i = 0; i < answers.length; i++) {
+                var r = document.createElement('button');
+                r.type = 'button';
+                r.className = 'btn btn-light response';
+                r.setAttribute('onclick', 'checkResponse(this)');
+                r.appendChild(document.createTextNode(answers[i]));
+
+                var col = document.createElement('div');
+                col.setAttribute('class', 'col-'+columnWidth);
+                col.appendChild(r);
+
+                row.appendChild(col);
+            }
+        }
+
+        function start() {
+            $('ready-btn').className = 'd-none';
+            $('stats').classList.remove('d-none');
+            $('questionaire').classList.remove('d-none');
+            next();
+        }
+
+        init();
+        const stopwatch = new StopWatch();
+    </script>
+</div>

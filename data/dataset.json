@@ -1,0 +1,52 @@
+{
+    "*": [
+    ],
+    "prescolar": [
+        {
+            "p": "¿Qué objeto pesa más?",
+            "o": [
+                "Una silla",
+                "Un par de espejuelos"
+            ]
+        },
+        {
+            "p": "¿Cuál de estos animales no sabe nadar?",
+            "o": [
+                "La mariposa",
+                "El pez"
+            ]
+        },
+        {
+            "p": "¿Quién trabaja en el hospital?",
+            "o": [
+                "La enfermera",
+                "El policía"
+            ]
+        },
+        {
+            "p": "¿Cuál de estos insectos liba las flores?",
+            "o": [
+                "La abeja",
+                "La mosca"
+            ]
+        }
+    ],
+    "1er grado": [
+        {
+            "p": "¿Qué letra le sigue a la F?",
+            "o": [
+                "G",
+                "E"
+            ]
+        },
+        {
+            "p": "¿Cuánto hay que sumarle a 12 para que dé 21?",
+            "o": [
+                9,
+                11
+            ]
+        }
+    ],
+    "2do grado": [
+    ]
+}
