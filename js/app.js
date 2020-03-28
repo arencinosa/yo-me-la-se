@@ -1,12 +1,19 @@
 'use strict';
 
-// const game = new Game(gameName, function(g) {
-    // game.setCurrentCategory('prescolar');
-// });
+var routes = {
+    home: new Route('home', 'home.html', true),
+    game: new Route('game', 'game.html', false),
+    summary: new Route('summary', 'summary.html', false)
+};
 
-const scheduler = new Scheduler();
+var router = null;
+var scheduler = null;
 
-const router = new Router([
-    new Route('home', 'home.html', false),
-    new Route('game', 'game.html', true),
-]);
+function initApp() {
+    initGameData(function() {
+        fadeOut($('app'), function(){
+            scheduler = new Scheduler();
+            router = new Router(Object.keys(routes).map(i => routes[i]));
+        });
+    });
+}

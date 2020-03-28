@@ -1,0 +1,139 @@
+<style>
+    #results {
+        position: absolute;
+        display: inline;
+    }
+    .player-result {
+        margin-bottom: 1em;
+    }
+    .player-name {
+        /* font-size: xx-large; */
+        /* font-family: 'Overlock', cursive; */
+        display: inline-block;
+        width: 100%;
+    }
+    .player-name:hover {
+        color: brown;
+        cursor: pointer;
+    }
+    .ranking {
+        position: relative;
+        bottom: 8px;
+        z-index: -1;
+        background-color: #007bff;
+        opacity: 0.5;
+        border-radius: 2px;
+        /* width: 300px; */
+        height: 5px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="loadingio-spinner-ripple-bb4dp9har9i spinner">
+            <div class="ldio-16a7fmmm635">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+        <div class="pseudo-progress text-center">
+            <div id="progress-text"></div>
+        </div>
+
+        <div id="results"></div>
+    </div>
+</div>
+
+<script>
+    function msg1() {
+        $('progress-text').textContent = 'Obteniendo estadísticas...';
+        setTimeout(msg2, 1500);
+    }
+
+    function msg2() {
+        $('progress-text').textContent = 'Calculando resultados...';
+        setTimeout(msg3, 1500);
+    }
+
+    function msg3() {
+        $('progress-text').textContent = 'Listo. Ahí van las conclusiones...';
+        setTimeout(showResults, 1500);
+    }
+
+    function showResults() {
+        var pseudoProgress = document.getElementsByClassName('pseudo-progress')[0];
+        pseudoProgress.classList = 'd-none';
+        
+        var spinner = document.getElementsByClassName('spinner')[0];
+        spinner.style['position'] = 'relative';
+
+        for (var i = 0; i < scheduler.players.length; i++) {
+            var pr = document.createElement('div');
+            pr.className = 'player-result';
+            
+            var pn = document.createElement('span');
+            pn.className = 'player-name display-4 text-right';
+            pn.title = 'Correctas: ' 
+                        + scheduler.players[i].stats.correctAnswers 
+                        + ' de '
+                        + (
+                            scheduler.players[i].stats.correctAnswers 
+                            + 
+                            scheduler.players[i].stats.wrongAnswers
+                        );
+            pn.textContent = scheduler.players[i].name;
+            pr.appendChild(pn);
+
+            var r = document.createElement('div');
+            r.className = 'ranking';
+            pr.appendChild(r);
+
+            $('results').appendChild(pr);
+        }
+        fadeOut(spinner, function(){
+            setTimeout(startProgress, 1500);
+        });
+    }
+
+    var percentInc = 2;
+    var percent = percentInc;
+    var initialWidth = 0;
+    function setProgress(){
+        var arr1 = document.getElementsByClassName('player-name');
+        var arr2 = document.getElementsByClassName('ranking');
+        for (var i = 0; i < scheduler.players.length; i++) {
+            var stats = scheduler.players[i].stats;
+            var top = 300;
+            var maxTop = stats.correctAnswers * top / (stats.correctAnswers + stats.wrongAnswers);
+
+            var x = initialWidth + maxTop*percent/100;
+            arr1[i].style.width = x + 'px';
+            arr2[i].style.width = x + 'px';
+        }
+        if (percent < 100) {
+            percent = Math.min(percent + percentInc, 100);
+            setTimeout(setProgress, 30);
+        }
+    }
+    function startProgress() {
+        var arr = document.getElementsByClassName('player-name');
+        for (var i = 0; i < arr.length; i++) {
+            initialWidth = Math.max(initialWidth, arr[i].offsetWidth);
+        }
+
+        for (var i = 0; i < arr.length; i++) {
+            arr[i].style.width = initialWidth + 'px';
+        }
+        arr = document.getElementsByClassName('ranking');
+        for (var i = 0; i < arr.length; i++) {
+            arr[i].style.width = initialWidth + 'px';
+        }
+        setTimeout(setProgress, 100);
+    }
+
+
+    if (Number(getComputedStyle($('app')).opacity) != 1) {
+        fadeIn($('app'), msg1);
+    }
+</script>

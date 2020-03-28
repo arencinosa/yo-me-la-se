@@ -1,6 +1,18 @@
-button.response {
-    /* margin-left: 20px; */
-    /* margin-right: 20px; */
+
+.spinner  {
+    position: absolute;
+}
+.pseudo-progress {
+    width: 227px;
+    height: 227px;
+    position: absolute;
+}
+.pseudo-progress #progress-text {
+    margin-top: 100px;
+}
+
+#game-name {
+    font-family: 'Overlock', cursive;
 }
 
 #game-conf > div {
@@ -27,6 +39,16 @@ button.response {
     color: #6c757d !important;
 }
 
+.player-stat {
+    min-width: 3em;
+    display: inline-block;
+    padding-left: 3px;
+}
+
+.player input {
+    width: 10em;
+}
+
 #ready-btn {
     margin-top: auto;
     margin-left: 2em;
@@ -36,6 +58,7 @@ button.response {
 
 #stats {
     margin-bottom: 15px;
+    opacity: 0;
 }
 
 .border-dotted {
@@ -46,22 +69,35 @@ button.response {
     font-size: x-small;
     position: absolute;
     margin-top: .25em;
-    /* font-weight: bold; */
+    z-index: -1;
 }
 
 .stat-value {
-    font-size: xx-large;
+    font-family: 'Overlock', cursive;
+    opacity: 0.9;
+}
+
+#right.stat-value {
+    color: #28a745;
+}
+
+#wrong.stat-value {
+    color: #dc3545;
 }
 
 #timer-container {
     height: 100%;
     border-radius: 6px;
-    border: solid 1px red;
+    border: solid 1px gray;
     margin: auto;
     width: 10px;
 }
 #timer {
-    background-color: red;
+    background-color: gray;
+}
+
+#questionaire {
+    /* opacity: 0; */
 }
 
 #next-btn {

@@ -41,9 +41,41 @@ function shuffle(arr) {
     return arr;
 }
 
+function deepCopy(arr) {
+    // ugly, I know, but this is the best
+    // "deep copy" version I found
+    return JSON.parse(JSON.stringify(arr));
+}
+
 function randomIndexes(top) {
     var arr = Array.apply(0, Array(top)).map(function(v,i) {
         return i;
     });
     return shuffle(arr);
+}
+
+function fadeIn(elem, callback=null) {
+    var i = Math.min(Number(getComputedStyle(elem).opacity) + 0.1, 1);
+    elem.style.opacity = i;
+    if (i < 1) {
+        setTimeout(function(){
+            fadeIn(elem, callback);
+        }, 100);
+    } else if (callback) {
+        // console.log("In: " + callback);
+        callback();
+    }
+}
+
+function fadeOut(elem, callback=null) {
+    var i = Math.max(Number(getComputedStyle(elem).opacity) - 0.1, 0);
+    elem.style.opacity = i;
+    if (i > 0) {
+        setTimeout(function(){
+            fadeOut(elem, callback);
+        }, 100);
+    } else if (callback) {
+        // console.log("Out: " + callback);
+        callback();
+    }
 }

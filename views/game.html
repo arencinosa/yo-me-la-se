@@ -3,7 +3,14 @@
         <div id="players" class="col-2"></div>
 
         <div id="board" class="col-7">
-            <button id="ready-btn" onclick="start()" class="btn btn-primary btn-lg bth-block" type="button">¡Listos!</button>
+            <button 
+                id="ready-btn" 
+                onclick="start()" 
+                class="btn btn-primary btn-lg bth-block" 
+                type="button"
+            >
+                ¿Listos?
+            </button>
 
             <div id="stats" class="container d-none">
                 <div class="row">
@@ -11,7 +18,7 @@
                         <div class="stat-label text-uppercase">
                             Correctas:
                         </div>
-                        <div id="right" class="stat-value text-center">0</div>
+                        <div id="right" class="stat-value text-center display-4">0</div>
                     </div>
                     
                     <div class="col-1">
@@ -24,7 +31,7 @@
                         <div class="stat-label text-uppercase">
                             Incorrectas:
                         </div>
-                        <div id="wrong" class="stat-value text-center">0</div>
+                        <div id="wrong" class="stat-value text-center display-4">0</div>
                     </div>
                 </div>
             </div>
@@ -49,12 +56,19 @@
     
     <script>
         function init() {
+            if (scheduler.players.length == 0) {
+                window.location.hash = '#home';
+                return;
+            }
+
             scheduler.players.forEach(player => {
                 var div = document.createElement('div');
                 div.className = 'player badge badge-light';
                 var label = document.createElement('div');
                 label.textContent = player.category;
                 div.appendChild(label);
+                var div2 = document.createElement('div');
+                div.appendChild(div2);
                 var input = document.createElement('input');
                 input.type = 'text';
                 input.value = player.name;
@@ -65,9 +79,28 @@
                         $('player-name').textContent = i.value;
                     }
                 });
-                div.appendChild(input);
+                div2.appendChild(input);
+                var stat = document.createElement('span');
+                stat.className = 'player-stat text-right';
+                div2.appendChild(stat);
+
+                player.stats.addEventListener(GameStats.STATS_CHANGED_EVENT, updateBoardStats);
+                player.stats.addEventListener(GameStats.STATS_CHANGED_EVENT, function() {
+                    stat.textContent = Math.floor(player.stats.correctAnswers*100 / (player.stats.correctAnswers+player.stats.wrongAnswers)) + '%';
+                });
                 $('players').appendChild(div);
             });
+
+            if (Number(getComputedStyle($('app')).opacity) != 1) {
+                fadeIn($('app'));
+            }
+        }
+        function updateBoardStats(e=null) {
+            var player = scheduler.currentPlayer();
+            if (!e || e.instance == player.stats) {
+                $('right').textContent = player.stats.correctAnswers;
+                $('wrong').textContent = player.stats.wrongAnswers;
+            }
         }
         function updateTimer() {
             var maxTime = 10;
@@ -88,11 +121,10 @@
                 }
                 var player = scheduler.currentPlayer();
                 player.stats.newWrongAnswer();
-                $('wrong').textContent = player.stats.wrongAnswers;
                 $('next-btn').classList.remove('d-none');
             }
             if (stopwatch.status != stopwatch.STOPPED) {
-                setTimeout(updateTimer, 100);
+                setTimeout(updateTimer, 30);
             }
         }
         function showOptions() {
@@ -116,23 +148,22 @@
             if (game.checkAnswer(btn.textContent, player.stats)) {
                 answerStyle = 'btn-success';
             }
-            // btn.className = 'btn response ' + answerStyle;
             btn.classList.remove('btn-light');
             btn.classList.add(answerStyle);
-
-            $('right').textContent = player.stats.correctAnswers;
-            $('wrong').textContent = player.stats.wrongAnswers;
         }
         function next() {
             $('next-btn').classList.add('d-none');
             stopwatch.reset();
 
             var status = scheduler.next();
-            var pregunta = status.question;
-            if (! pregunta) {
-                alert('se acabó');
+            if (! status) {
+                alert('Hemos llegado al final.');
+                fadeOut($('app'), function(){
+                    window.location.hash = '#summary';
+                });
                 return;
             }
+            var quiz = status.quiz;
 
             $('show-options').classList.remove('d-none');
             $('options').classList.add('d-none');
@@ -152,13 +183,12 @@
                 }
             }
             var player = scheduler.currentPlayer();
-            $('right').textContent = player.stats.correctAnswers;
-            $('wrong').textContent = player.stats.wrongAnswers;
             $('player-name').textContent = player.name;
+            updateBoardStats();
 
-            $('question').innerHTML = pregunta.p;
+            $('question').innerHTML = quiz.p;
             $('options').innerHTML = '';
-            var columnWidth = Math.floor(12 / pregunta.o.length) - 1;
+            var columnWidth = Math.floor(12 / quiz.o.length) - 1;
             if (columnWidth < 1) {
                 columnWidth = 3;
             }
@@ -166,7 +196,7 @@
             var row = document.createElement('div');
             row.className = 'row';
             $('options').appendChild(row);
-            var answers = shuffle(JSON.parse(JSON.stringify(pregunta.o)));
+            var answers = shuffle(deepCopy(quiz.o));
             for(var i = 0; i < answers.length; i++) {
                 var r = document.createElement('button');
                 r.type = 'button';
@@ -183,10 +213,18 @@
         }
 
         function start() {
-            $('ready-btn').className = 'd-none';
-            $('stats').classList.remove('d-none');
-            $('questionaire').classList.remove('d-none');
-            next();
+            fadeOut($('ready-btn'), function(){
+                $('ready-btn').className = 'd-none';
+                $('stats').classList.remove('d-none');
+                fadeIn($('stats'), function(){
+                    setTimeout(function(){
+                        next();
+                        setTimeout(function(){
+                            $('questionaire').classList.remove('d-none');
+                        }, 1000);
+                    }, 1000);
+                });
+            });
         }
 
         init();

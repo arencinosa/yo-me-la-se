@@ -1,51 +1,72 @@
 'use strict';
 
-const GameStats = class {
+var _game_data = null;
+function initGameData(callback) {
+    fetch('data/dataset.json?rnd=' + Math.random())
+    .then((response) => {
+        return response.json();
+    })
+    .then((json) => {
+        _game_data = json;
+        Object.keys(_game_data).forEach(cat => {
+            shuffle(_game_data[cat]);
+        });
+        callback();
+    });
+}
+
+class GameStats extends GenericEventHandler {
+    static get STATS_CHANGED_EVENT() { return 'stats_changed'};
+
     constructor() {
+        super();
         this.wrongAnswers = 0;
         this.correctAnswers = 0;
     }
 
     newWrongAnswer() {
         this.wrongAnswers++;
+        this.trigger(GameStats.STATS_CHANGED_EVENT, {
+            instance: this,
+            event: GameStats.STATS_CHANGED_EVENT,
+            causedBy: this.newWrongAnswer.name
+        });
     }
 
     newCorrectAnswer() {
         this.correctAnswers++;
+        this.trigger(GameStats.STATS_CHANGED_EVENT, {
+            instance: this,
+            event: GameStats.STATS_CHANGED_EVENT,
+            causedBy: this.newCorrectAnswer.name
+        });
     }
 }
 
-const Game = class {
-    constructor(name="", callback=undefined) {
-        this.name = name;
-        this.stats = new GameStats();
-        this.currentCategory = undefined;
-        this.currentIndex = -1;
-        this.data = {};
-
-        (function(self, callback) {
-            var url = 'data/dataset.json?rnd=' + Math.random();
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState === 4 && this.status === 200) {
-                    self.data = JSON.parse(this.responseText);
-                    self.currentCategory = self.getCategories()[0];
-                    if (callback) {
-                        callback(self);
-                    }
-                }
-            };
-            xhttp.open('GET', url, true);
-            xhttp.send();
-        })(this, callback);
+class Game {
+    static get WILDCARD_CATEGORY() { return '*' };
+    static get _data() { return _game_data; };
+    static get categories() {
+        return Object.keys(Game._data).filter(cat => Game._data[cat].length > 0);
     }
 
-    getCategories() {
-        return Object.keys(this.data);
+    constructor(category=null) {
+        this.currentCategory = category;
+
+        this.reset();
     }
 
-    getQuestions(category) {
-        return this.data[category];
+    reset() {
+        var category = this.currentCategory || Game.WILDCARD_CATEGORY;
+        if ( !(category in Game.categories) ) {
+            this.setCurrentCategory(Game.categories[0]);
+        }
+        this.setCurrentCategory(category);
+    }
+
+    getQuizzes(category=null) {
+        category = category || this.currentCategory;
+        return Game._data[category];
     }
 
     setCurrentCategory(category) {
@@ -53,17 +74,21 @@ const Game = class {
         this.currentIndex = -1;
     }
 
-    currentQuestion() {
-        return this.data[this.currentCategory][this.currentIndex];
+    currentQuiz() {
+        try {
+            return Game._data[this.currentCategory][this.currentIndex];
+        } catch (e) {
+            return null;
+        }
     }
 
-    nextQuestion() {
+    nextQuiz() {
         this.currentIndex++;
-        return this.currentQuestion();
+        return this.currentQuiz();
     }
 
-    checkAnswer(answer, gameStats=undefined) {
-        if (answer == this.currentQuestion().o[0]) {
+    checkAnswer(answer, gameStats=null) {
+        if (answer == this.currentQuiz().o[0]) {
             if (gameStats) {
                 gameStats.newCorrectAnswer();
             }

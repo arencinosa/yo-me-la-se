@@ -8,9 +8,11 @@
     <div id="game-conf"></div>
 
     <button 
+        id="setup-btn"
         class="btn btn-primary" 
         onclick="setup()" 
         style="margin-top: 40px;"
+        disabled="disabled"
     >
         Configurar
     </button>
@@ -18,60 +20,74 @@
     <script>
         $('game-name').textContent = gameName;
 
-        var g = new Game(gameName, function(gameObj) {
-            gameObj.getCategories().forEach(category => {
-                if (category == '*' || gameObj.getQuestions(category).length == 0) {
-                    return;
+        Game.categories.forEach(category => {
+            if (category == Game.WILDCARD_CATEGORY) {
+                return;
+            }
+
+            var container, row, col;
+
+            container = document.createElement('div');
+            container.className = 'container';
+            container.setAttribute('meta-category', category);
+            
+            row = document.createElement('div');
+            row.className = 'row';
+            container.appendChild(row);
+            
+            var ig = document.createElement('div');
+            ig.className = 'input-group';
+            row.appendChild(ig);
+
+            var igpp = document.createElement('div');
+            igpp.className = 'input-group-prepend';
+            ig.appendChild(igpp);
+
+            var label = document.createElement('span');
+            label.className = 'input-group-text';
+            label.textContent = category;
+            igpp.appendChild(label);
+
+            var counter = document.createElement('input');
+            counter.type = 'text';
+            counter.readOnly = true;
+            counter.className = 'form-control-plaintext counter';
+            counter.id = category;
+            counter.value = 0;
+            igpp.appendChild(counter);
+
+            row = document.createElement('div');
+            row.className = 'row';
+            container.appendChild(row);
+
+            var slider = document.createElement('input');
+            slider.className = 'slider';
+            slider.type = 'range';
+            slider.min = 0;
+            slider.max = 5;
+            slider.value = 0;
+            slider.addEventListener('input', function(){
+                $(category).value = slider.value;
+
+                var total_players = 0;
+                var sliders = document.getElementsByClassName('slider');
+                for (var i = 0; i < sliders.length; i++) {
+                    if (sliders[i].type == 'range') {
+                        total_players += Number(sliders[i].value);
+                    } else {
+                        console.log("ERROR: expecting only sliders but got " + sliders[i]);
+                    }
                 }
-
-                var container, row, col;
-
-                container = document.createElement('div');
-                container.className = 'container';
-                container.setAttribute('meta-category', category);
-                
-                row = document.createElement('div');
-                row.className = 'row';
-                container.appendChild(row);
-                
-                var ig = document.createElement('div');
-                ig.className = 'input-group';
-                row.appendChild(ig);
-
-                var igpp = document.createElement('div');
-                igpp.className = 'input-group-prepend';
-                ig.appendChild(igpp);
-
-                var label = document.createElement('span');
-                label.className = 'input-group-text';
-                label.textContent = category;
-                igpp.appendChild(label);
-
-                var counter = document.createElement('input');
-                counter.type = 'text';
-                counter.readOnly = true;
-                counter.className = 'form-control-plaintext counter';
-                counter.id = category;
-                counter.value = 0;
-                igpp.appendChild(counter);
-
-                row = document.createElement('div');
-                row.className = 'row';
-                container.appendChild(row);
-
-                var slider = document.createElement('input');
-                slider.type = 'range';
-                slider.min = 0;
-                slider.max = 5;
-                slider.value = 0;
-                slider.addEventListener('input', function(){
-                    $(category).value = slider.value;
-                });
-                row.appendChild(slider);
-
-                $('game-conf').append(container);
+                $('setup-btn').disabled = (total_players == 0);
             });
+            row.appendChild(slider);
+
+            $('game-conf').append(container);
         });
+
+        if (Number(getComputedStyle($('app')).opacity) != 1) {
+            fadeIn($('app'));
+        }
 
         function setup() {
             var counters = document.getElementsByClassName('counter');
@@ -91,8 +107,11 @@
                     });
                 }
             }
-            scheduler.init(players);
-            router.goToRoute('game.html');
+            // scheduler = new Scheduler(players);
+            scheduler.init(5, players);
+            fadeOut($('app'), function() {
+                window.location.hash = '#game';
+            });
         }
     </script>
 </div>

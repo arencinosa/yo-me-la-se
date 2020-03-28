@@ -1,25 +1,18 @@
 'use strict';
 
-function Router(routes) {
-    try {
+class Router {
+    constructor(routes) {
         if(!routes) {
             throw 'error: routes param is mandatory';
         }
-        this.constructor(routes);
-        this.init();
-    } catch(e) {
-        console.error(e);
-    }
-}
 
-Router.prototype = {
-    routes: undefined,
-    rootElem: undefined,
-    constructor: function (routes) {
         this.routes = routes;
         this.rootElem = document.getElementById('app');
-    },
-    init: function() {
+        
+        this.init();
+    }
+
+    init() {
         var r = this.routes;
         (function(scope, r){
             window.addEventListener('hashchange', function(e){
@@ -27,28 +20,39 @@ Router.prototype = {
             });
         })(this, r);
         this.hasChanged(this, r);
-    },
-    hasChanged: function(scope, r) {
-        if (window.location.hash.length > 0) {
-            for (var i = 0, length = r.length; i < length; i++) {
-                var route = r[i];
-                if (route.isActiveRoute(window.location.hash.substr(1))) {
-                    scope.goToRoute(route.htmlName);
-                }
-            }
-        } else {
-            for (var i = 0, length = r.length; i < length; i++) {
+    }
+    
+    hasChanged(scope, r) {
+        if (window.location.hash.length == 0) {
+            // looking for default route
+            for (var i = 0; i < r.length; i++) {
                 var route = r[i];
                 if (route.isDefault) {
-                    scope.goToRoute(route.htmlName);
+                    window.location.hash = '#' + route.name;
+                    return;
                 }
             }
+            // fallback: first route
+            window.location.hash = '#' + r[0].name;
+            return;
         }
-    },
-    goToRoute: function(htmlName) {
+
+        for (var i = 0; i < r.length; i++) {
+            var route = r[i];
+            if (route.isActiveRoute(window.location.hash.substr(1))) {
+                scope.goToRoute(route.htmlName);
+            }
+        }
+    }
+
+    // redirectTo(obj) {
+        // if 
+    // }
+
+    goToRoute(htmlName) {
         (function(scope) {
-            var url = 'views/' + htmlName + '?rnd=' + Math.random(),
-                xhttp = new XMLHttpRequest();
+            var url = 'views/' + htmlName + '?rnd=' + Math.random();
+            var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     // scope.rootElem.innerHTML = this.responseText;
