@@ -1,5 +1,26 @@
 {
     "*": [
+        {
+            "p": "¿De qué color es el caballo blanco de Maceo?",
+            "o": [
+                "Blanco",
+                "Negro"
+            ]
+        },
+        {
+            "p": "El padre de María tiene 5 hijos: Lala, Lele, Lili, Lolo, y...",
+            "o": [
+                "María",
+                "Lulu"
+            ]
+        },
+        {
+            "p": "Adivina: \"Oro parece, plata no es, quien no lo adivine ¡bien bobo es¡\"",
+            "o": [
+                "El plátano",
+                "El sol"
+            ]
+        }
     ],
     "preescolar": [
         {
