@@ -1,4 +1,4 @@
-'use strict;'
+'use strict';
 
 const Scheduler = class {
     constructor(gameName) {
