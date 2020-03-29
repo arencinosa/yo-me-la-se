@@ -109,9 +109,10 @@
         }
         function updateTimer() {
             var maxTime = 10;
-            var lapse = (100 - Math.min(100, maxTime*stopwatch.currentTime()/1000));
-            $('timer').style['height'] = lapse + '%';
-            if (lapse == 0) {
+            var elapsed = stopwatch.currentTime()/1000;
+            var remaining = 100 - Math.min(100, elapsed*100/maxTime);
+            $('timer').style['height'] = remaining + '%';
+            if (remaining == 0) {
                 stopwatch.stop();
                 var btns = document.getElementsByClassName('response');
                 var game = scheduler.currentGame();
