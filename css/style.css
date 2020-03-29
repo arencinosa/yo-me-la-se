@@ -91,9 +91,12 @@
     border: solid 1px gray;
     margin: auto;
     width: 10px;
+    display: flex;
+    flex-direction: column;
 }
 #timer {
     background-color: gray;
+    margin-top: auto;
 }
 
 #questionaire {
