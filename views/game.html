@@ -7,9 +7,10 @@
                 id="ready-btn" 
                 onclick="start()" 
                 class="btn btn-primary btn-lg bth-block" 
+                style="opacity: 0;"
                 type="button"
             >
-                ¿Listos?
+                (click para continuar)
             </button>
 
             <div id="stats" class="container d-none">
@@ -92,7 +93,11 @@
             });
 
             if (Number(getComputedStyle($('app')).opacity) != 1) {
-                fadeIn($('app'));
+                // fadeIn($('app'));
+                $('app').style.opacity = 1;
+                setTimeout(function(){
+                    fadeIn($('ready-btn'));
+                }, 500);
             }
         }
         function updateBoardStats(e=null) {

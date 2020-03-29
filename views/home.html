@@ -86,7 +86,8 @@
         });
 
         if (Number(getComputedStyle($('app')).opacity) != 1) {
-            fadeIn($('app'));
+            // fadeIn($('app'));
+            $('app').style.opacity = 1;
         }
 
         function setup() {
