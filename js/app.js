@@ -11,9 +11,22 @@ var scheduler = null;
 
 function initApp() {
     initGameData(function() {
-        fadeOut($('app'), function(){
-            scheduler = new Scheduler();
-            router = new Router(Object.keys(routes).map(i => routes[i]));
-        });
+        var div = document.createElement('div');
+        div.style.position = 'fixed';
+        div.style.top = 0;
+        div.style.left = 0;
+        div.style.width = '100%';
+        div.style.height = '100%';
+        div.style.opacity = 0.5;
+        div.style.cursor = 'pointer';
+        // div.style.backgroundColor = 'red';
+        div.addEventListener('click', function(){
+            fadeOut($('app'), function(){
+                scheduler = new Scheduler();
+                router = new Router(Object.keys(routes).map(i => routes[i]));
+            });
+        })
+        $('app').appendChild(div);
+        $('progress-text').textContent = '(click para continuar)';
     });
 }
