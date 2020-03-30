@@ -84,7 +84,7 @@
 
   1. Reportar preguntas utilizadas
 
-  Esto, en cualquier caso, es útil. Y no solo las preguntas, sino el estado final del juego (jugadores, puntajes, tiempos, ...)
+     Esto, en cualquier caso, es útil. Y no solo las preguntas, sino el estado final del juego (jugadores, puntajes, tiempos, ...)
   
   2. Asignarle a cada pregunta la última fecha en la que se utilizó
 
