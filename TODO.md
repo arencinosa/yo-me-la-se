@@ -2,24 +2,31 @@
 
 
 ---
+## BUGS
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/1))] Si se le hace `click` a un botón en medio de un `fade` se cae en una especie de ciclo infinito de opacidad.
+
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/2)] No se actualiza el nombre del jugador si se cambia durante el juego (al menos, al jugador actual)
+
+
+---
 ## Por hacer
 * ~~Usar las preguntas de la categoría `*` (random >= 0.7?)~~
 
-   La idea es usarlas como comodín, para cualquier categoría/nivel.
+  ~~La idea es usarlas como comodín, para cualquier categoría/nivel.~~
 
 * Crear una base de datos (sqlite?) central
 
-   Ahora mismo el juego se nutre de un JSON, que a su vez se puede generar a partir de un CSV, pero quizás una solución más "universal" podría ser utilizar diferentes bases de datos (digamos) por niveles, y dar la opción de cargar más de una a la vez.
+  Ahora mismo el juego se nutre de un JSON, que a su vez se puede generar a partir de un CSV, pero quizás una solución más "universal" podría ser utilizar diferentes bases de datos (digamos) por niveles, y dar la opción de cargar más de una a la vez.
 
   * Crear sqlite2json
 
 * Dar soporte para varios idiomas
 
-   Cada pregunta podría tener definido en qué idioma está (o "requiere"), y se puede dar la opción por jugador cuáles incluir en su set de preguntas.
+  Cada pregunta podría tener definido en qué idioma está (o "requiere"), y se puede dar la opción por jugador cuáles incluir en su set de preguntas.
 
-* Personalizar tiempo límite
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/3)] Personalizar tiempo límite
 
-   Aquí, varios niveles:
+  Aquí, varios niveles:
 
   * global (o sea, para todos por igual)
   * por nivel ("...los de preescolar, 15 segundos; los adultos, 7")
@@ -27,7 +34,7 @@
 
 * _Publicar en GitHub_
 
-   Bueno, ahora mismo el repo como tal está disponible, pero pensé en algo más a lo "hosting". Intenté algo que vi que permitían pero solo sirven el index.html dentro de un `iframe`, y así no sé cómo hacerlo compatible con lo que hay hasta ahora.
+  Bueno, ahora mismo el repo como tal está disponible, pero pensé en algo más a lo "hosting". Intenté algo que vi que permitían pero solo sirven el index.html dentro de un `iframe`, y así no sé cómo hacerlo compatible con lo que hay hasta ahora.
 
 * Permitir especificar cantidad de rondas
 
@@ -35,50 +42,107 @@
 
 * Multi-jugador
 
-   Cada jugador puede "registrarse" en una partida, y todos los jugadores ven lo mismo, excepto que solo el jugador en turno puede responder.
+  Cada jugador puede "registrarse" en una partida, y todos los jugadores ven lo mismo, excepto que solo el jugador en turno puede responder.
 
 
 ---
 ## Por mejorar
 
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/4)] Que el resumen quepa en la pantalla
+
+  ...sin necesidad de cambiar el nivel de zoom en el navegador.
+
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/5)] Cambiar el `alert` del final del juego por algo más _user-friendly_
+
+* Que el tiempo que va quedando cambie de color
+
+  Que vaya de verde a rojo, según se vaya agotando el tiempo
+
 * Dar más estadísticas de tiempo
 
-   Quizás mostrar el tiempo total, por ronda, por jugador, ...
+  Quizás mostrar el tiempo total, por ronda, por jugador, ...
 
 * Mostrar estadísticas por jugador
 
-   Correctas, tiempo, ..., no solo en su turno, sino en todo momento
+  Correctas, tiempo, ..., no solo en su turno, sino en todo momento
 
-* Mostrar estadísticas en el resumen
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/6)] Mostrar estadísticas en el resumen
 
 * Dar la posibilidad de "corregir" el balance por jugador
 
-   Quizás hubo un error en la base de datos, o quizás alguna respuesta desactualizada, o incluso alguien se desconectó durante el "countdown" y perdió la posibilidad de responder correctamente.
+  Quizás hubo un error en la base de datos, o quizás alguna respuesta desactualizada, o incluso alguien se desconectó durante el "countdown" y perdió la posibilidad de responder correctamente.
 
 * Agregar más preguntas
 
 * Crear "temporadas" por separado
 
-   Mientras no haya un conjunto suficientemente grande de preguntas (stock), volver a jugar con el mismo juego de datos significaría repetir muchas preguntas ya vistas. Una posibilidad podría ser aislar/archivar las preguntas que ya salieron, e intentar no repetir.
+  Mientras no haya un conjunto suficientemente grande de preguntas (stock), volver a jugar con el mismo juego de datos significaría repetir muchas preguntas ya vistas. Una posibilidad podría ser aislar/archivar las preguntas que ya salieron, e intentar no repetir.
 
-* Crear un BTS para llevar mejor la administración de las tareas pendientes
+  1. Reportar preguntas utilizadas
 
-* Dar soporte para imágenes
+  Esto, en cualquier caso, es útil. Y no solo las preguntas, sino el estado final del juego (jugadores, puntajes, tiempos, ...)
+  
+  2. Asignarle a cada pregunta la última fecha en la que se utilizó
+
+* ~~Crear un BTS para llevar mejor la administración de las tareas pendientes~~
+
+  >...no recordaba la sección de _issues_ de GitHub :P
+
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/7)] Dar soporte para imágenes
 
    Quizás como parte del texto de la pregunta, quizás como parte de las opciones de respuesta.
 
-* Dar soporte para sonidos
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/8)] Dar soporte para sonidos
 
   * Agregar efectos sonoros
   * Sonidos como parte de las preguntas/respuestas
 
-* Dar soporte para videos
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/9)] Dar soporte para videos
 
    Quizás como parte del texto de la pregunta, quizás como parte de las opciones de respuesta.
 
+* Hacer _tracking_ del desempeño del jugador
+
+  Al menos, el orden de respuestas correctas e incorrectas
+
+* Hacer que los botones para avanzar estén siempre visibles
+
+  Por ejemplo, el de "Configurar" queda al final de la lista de _sliders_
+
+* Agregar "explicaciones" a las respuestas
+
+  A veces es válido hacer aclaraciones de por qué una respuesta y no otra. A veces es útil también ampliar un poquito para que aprendamos más
+
+* Agregar indicios a las preguntas
+
+  ...ya sean a modo informativo o para ayudar a la resolución. Por ejemplo, dejar claro que la diferencia entre las opciones es solo una letra ("aráCnido" vs. "aráGnido"). Posibles ideas:
+
+  * Aclaraciones
+
+    Cosas que bien que podrían estar presentes en el propio cuerpo de la pregunta pero harían el texto muy largo, y que pueden resultar útiles como "fijarse bien en la ortografía".
+
+  * Temática
+
+    "Ciencias", "Historia", "Literatura", "Cultura general", ..., "Sombreros", "Pepito", ...
+
+  * Nivel de dificultad
+
+    Especificar cierto grado de dificultad ayudaría también a balancear un poco el set de preguntas por jugador
+
+  * Traducciones
+
+    Como alternativa al soporte de idiomas, podríamos ir incorporando ciertas traducciones que ayuden al entendimiento cuando mezclemos varios en el mismo contexto.
+
+* Dejar saber cuántas preguntas por categorías hay
+
+* Cambiar los _sliders_ del "_setup_" por (digamos) _textareas_
+
+  En vez de poner límites (y para colmo, anónimos), se puede poner un área editable para poner los nombres (digamos) uno por línea
 
 ---
 ## Otras ideas
+
+* Jugar por equipos
 
 * Tiempo límite por jugador, en vez de (o además de) por pregunta
 
