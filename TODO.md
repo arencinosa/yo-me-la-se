@@ -7,6 +7,9 @@
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/2)] No se actualiza el nombre del jugador si se cambia durante el juego (al menos, al jugador actual)~~
 
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/25)] Eliminar las categorías que no contienen preguntas
+
+  Se está dando la opción de agregar jugadores en categorías cuya colección de preguntas está vacía.
 
 ---
 ## Por hacer
