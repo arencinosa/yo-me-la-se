@@ -14,13 +14,13 @@
 
   ~~La idea es usarlas como comodín, para cualquier categoría/nivel.~~
 
-* Crear una base de datos (sqlite?) central
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/10)] Crear una base de datos (¿sqlite?) central
 
   Ahora mismo el juego se nutre de un JSON, que a su vez se puede generar a partir de un CSV, pero quizás una solución más "universal" podría ser utilizar diferentes bases de datos (digamos) por niveles, y dar la opción de cargar más de una a la vez.
 
   * Crear sqlite2json
 
-* Dar soporte para varios idiomas
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/11)] Dar soporte para varios idiomas
 
   Cada pregunta podría tener definido en qué idioma está (o "requiere"), y se puede dar la opción por jugador cuáles incluir en su set de preguntas.
 
@@ -32,15 +32,19 @@
   * por nivel ("...los de preescolar, 15 segundos; los adultos, 7")
   * por jugador ("los novatos, 10 segundos; los más expertos, 3")
 
-* _Publicar en GitHub_
+* Hostear el proyecto de forma pública
 
-  Bueno, ahora mismo el repo como tal está disponible, pero pensé en algo más a lo "hosting". Intenté algo que vi que permitían pero solo sirven el index.html dentro de un `iframe`, y así no sé cómo hacerlo compatible con lo que hay hasta ahora.
+  Ahora mismo el repo está disponible, pero el juego como tal no está visible para los posibles usuarios. Intenté algo que vi que GitHub permitía pero solo sirve el `index.html` dentro de un `iframe`, y así no sé cómo hacerlo compatible con las rutas relativas que hay hasta ahora.
 
-* Permitir especificar cantidad de rondas
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/12)] Permitir especificar cantidad de rondas
 
+  Ahora mismo es algo "cableado", cuando debería ser algo especificable a nivel de interfaz. 
+  
   * Llegar a un balance (fórmula?) entre cantidad de jugadores y rondas a jugar
+  
+    Quizás sería bueno para que el juego no se haga muy largo/tedioso.
 
-* Multi-jugador
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/13)] Multi-jugador
 
   Cada jugador puede "registrarse" en una partida, y todos los jugadores ven lo mismo, excepto que solo el jugador en turno puede responder.
 
@@ -54,27 +58,27 @@
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/5)] Cambiar el `alert` del final del juego por algo más _user-friendly_
 
-* Que el tiempo que va quedando cambie de color
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/14)] Que el tiempo que va quedando cambie de color
 
   Que vaya de verde a rojo, según se vaya agotando el tiempo
 
-* Dar más estadísticas de tiempo
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/15)] Dar más estadísticas de tiempo
 
   Quizás mostrar el tiempo total, por ronda, por jugador, ...
 
-* Mostrar estadísticas por jugador
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/16)] Mostrar estadísticas por jugador
 
   Correctas, tiempo, ..., no solo en su turno, sino en todo momento
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/6)] Mostrar estadísticas en el resumen
 
-* Dar la posibilidad de "corregir" el balance por jugador
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/17)] Dar la posibilidad de "corregir" el balance por jugador
 
   Quizás hubo un error en la base de datos, o quizás alguna respuesta desactualizada, o incluso alguien se desconectó durante el "countdown" y perdió la posibilidad de responder correctamente.
 
 * Agregar más preguntas
 
-* Crear "temporadas" por separado
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/18)] Crear "temporadas" por separado
 
   Mientras no haya un conjunto suficientemente grande de preguntas (stock), volver a jugar con el mismo juego de datos significaría repetir muchas preguntas ya vistas. Una posibilidad podría ser aislar/archivar las preguntas que ya salieron, e intentar no repetir.
 
@@ -101,19 +105,19 @@
 
    Quizás como parte del texto de la pregunta, quizás como parte de las opciones de respuesta.
 
-* Hacer _tracking_ del desempeño del jugador
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/19)] Hacer _tracking_ del desempeño del jugador
 
   Al menos, el orden de respuestas correctas e incorrectas
 
-* Hacer que los botones para avanzar estén siempre visibles
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/20)] Hacer que los botones para avanzar estén siempre visibles
 
   Por ejemplo, el de "Configurar" queda al final de la lista de _sliders_
 
-* Agregar "explicaciones" a las respuestas
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/21)] Agregar "explicaciones" a las respuestas
 
   A veces es válido hacer aclaraciones de por qué una respuesta y no otra. A veces es útil también ampliar un poquito para que aprendamos más
 
-* Agregar indicios a las preguntas
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/22)] Agregar indicios a las preguntas
 
   ...ya sean a modo informativo o para ayudar a la resolución. Por ejemplo, dejar claro que la diferencia entre las opciones es solo una letra ("aráCnido" vs. "aráGnido"). Posibles ideas:
 
@@ -133,9 +137,13 @@
 
     Como alternativa al soporte de idiomas, podríamos ir incorporando ciertas traducciones que ayuden al entendimiento cuando mezclemos varios en el mismo contexto.
 
-* Dejar saber cuántas preguntas por categorías hay
+  * Autor/contribuidor
 
-* Cambiar los _sliders_ del "_setup_" por (digamos) _textareas_
+    ...para dar méritos a quien sugirió la pregunta (o para hacerlo responsable :P)
+
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/23)] Dejar saber cuántas preguntas por categorías hay
+
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/24)] Cambiar los _sliders_ del "_setup_" por (digamos) _textareas_
 
   En vez de poner límites (y para colmo, anónimos), se puede poner un área editable para poner los nombres (digamos) uno por línea
 
@@ -154,7 +162,7 @@
 
 * Seguir avanzando hasta equivocarse
 
-   Sería hacer que el turno terminara solo al equivocarnos.
+   Sería hacer que el turno terminara sólo al equivocarnos.
 
 ---
 ## Comentarios
