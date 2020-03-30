@@ -5,7 +5,7 @@
 ## BUGS
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/1)] Si se le hace `click` a un botón en medio de un `fade` se cae en una especie de ciclo infinito de opacidad.~~
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/2)] No se actualiza el nombre del jugador si se cambia durante el juego (al menos, al jugador actual)
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/2)] No se actualiza el nombre del jugador si se cambia durante el juego (al menos, al jugador actual)~~
 
 
 ---

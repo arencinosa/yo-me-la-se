@@ -76,7 +76,7 @@
                 input.addEventListener('input', function(obj) {
                     var i = obj.target;
                     player.name = i.value;
-                    if (i.parentNode.classList.contains('active')) {
+                    if (i.parentNode.parentNode.classList.contains('active')) {
                         $('player-name').textContent = i.value;
                     }
                 });
