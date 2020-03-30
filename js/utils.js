@@ -54,28 +54,56 @@ function randomIndexes(top) {
     return shuffle(arr);
 }
 
-function fadeIn(elem, callback=null) {
-    var i = Math.min(Number(getComputedStyle(elem).opacity) + 0.1, 1);
+function fade(elem, increment, target, callback=null) {
+    var i = Number(getComputedStyle(elem).opacity) + increment;
+    i = Math.max(0, Math.min(1, i));
     elem.style.opacity = i;
-    if (i < 1) {
+
+    if (
+        (increment > 0 && i < target)
+        ||
+        (increment < 0 && i > target)
+       ) {
+        
         setTimeout(function(){
-            fadeIn(elem, callback);
+            fade(elem, increment, target, callback);
         }, 100);
-    } else if (callback) {
-        // console.log("In: " + callback);
+        return;
+    }
+    
+    if (callback) {
         callback();
     }
 }
 
+function generateBlocker() {
+    var div = document.createElement('div');
+    div.style.position = 'fixed';
+    div.style.left = 0;
+    div.style.top = 0;
+    div.style.width = '100%';
+    div.style.height = '100%';
+    return div;
+}
+
+function fadeIn(elem, callback=null) {
+    var div = generateBlocker();
+    $('app').appendChild(div);
+    fade(elem, 0.1, 1, function(){
+        $('app').removeChild(div);
+        if (callback) {
+            callback();
+        }
+    });
+}
+
 function fadeOut(elem, callback=null) {
-    var i = Math.max(Number(getComputedStyle(elem).opacity) - 0.1, 0);
-    elem.style.opacity = i;
-    if (i > 0) {
-        setTimeout(function(){
-            fadeOut(elem, callback);
-        }, 100);
-    } else if (callback) {
-        // console.log("Out: " + callback);
-        callback();
-    }
+    var div = generateBlocker();
+    $('app').appendChild(div);
+    fade(elem, -0.1, 0, function(){
+        $('app').removeChild(div);
+        if (callback) {
+            callback();
+        }
+    });
 }
