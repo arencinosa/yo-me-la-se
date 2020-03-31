@@ -1,16 +1,17 @@
 'use strict';
 
-var _game_data = null;
+var _game_data = {};
 function initGameData(callback) {
     fetch('data/dataset.json?rnd=' + Math.random())
     .then((response) => {
         return response.json();
     })
     .then((json) => {
-        _game_data = json;
-        Object.keys(_game_data).forEach(cat => {
-            shuffle(_game_data[cat]);
-        });
+        var gd = {};
+        Object.keys(json).forEach(cat => {
+            gd[cat] = shuffle(json[cat].filter(x => x.p != null && x.p != ""));
+        })
+        _game_data = gd;
         callback();
     });
 }
