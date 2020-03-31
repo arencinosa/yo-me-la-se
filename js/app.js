@@ -19,7 +19,6 @@ function initApp() {
         div.style.height = '100%';
         div.style.opacity = 0.5;
         div.style.cursor = 'pointer';
-        // div.style.backgroundColor = 'red';
         div.addEventListener('click', function(){
             fadeOut($('app'), function(){
                 scheduler = new Scheduler();
@@ -28,5 +27,6 @@ function initApp() {
         })
         $('app').appendChild(div);
         $('progress-text').textContent = '(click para continuar)';
+        $('progress-text').classList.add('flashing');
     });
 }

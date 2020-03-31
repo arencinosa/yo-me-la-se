@@ -9,6 +9,20 @@
 .pseudo-progress #progress-text {
     margin-top: 100px;
 }
+.flashing {
+    animation-duration: 1.7857142857142856s;
+    animation-name: flashing;
+    animation-iteration-count: infinite;
+}
+@keyframes flashing {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
 
 #game-name {
     font-family: 'Overlock', cursive;
