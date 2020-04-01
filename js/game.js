@@ -9,7 +9,10 @@ function initGameData(callback) {
     .then((json) => {
         var gd = {};
         Object.keys(json).forEach(cat => {
-            gd[cat] = shuffle(json[cat].filter(x => x.p != null && x.p != ""));
+            var qs = json[cat].filter(x => x.p != null && x.p != "");
+            if (qs.length > 0) {
+                gd[cat] = shuffle(qs);
+            }
         })
         _game_data = gd;
         callback();
@@ -48,7 +51,7 @@ class Game {
     static get WILDCARD_CATEGORY() { return '*' };
     static get _data() { return _game_data; };
     static get categories() {
-        return Object.keys(Game._data).filter(cat => Game._data[cat].length > 0);
+        return Object.keys(Game._data);
     }
 
     constructor(category=null) {
