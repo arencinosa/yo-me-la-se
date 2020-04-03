@@ -7,9 +7,9 @@
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/2)] No se actualiza el nombre del jugador si se cambia durante el juego (al menos, al jugador actual)~~
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/25)] Eliminar las categorías que no contienen preguntas
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/25)] Eliminar las categorías que no contienen preguntas~~
 
-  Se está dando la opción de agregar jugadores en categorías cuya colección de preguntas está vacía.
+  ~~Se está dando la opción de agregar jugadores en categorías cuya colección de preguntas está vacía.~~
 
 ---
 ## Por hacer
@@ -31,7 +31,7 @@
 
   Aquí, varios niveles:
 
-  * global (o sea, para todos por igual)
+  * ~~global (o sea, para todos por igual)~~
   * por nivel ("...los de preescolar, 15 segundos; los adultos, 7")
   * por jugador ("los novatos, 10 segundos; los más expertos, 3")
 
@@ -39,9 +39,9 @@
 
   Ahora mismo el repo está disponible, pero el juego como tal no está visible para los posibles usuarios. Intenté algo que vi que GitHub permitía pero solo sirve el `index.html` dentro de un `iframe`, y así no sé cómo hacerlo compatible con las rutas relativas que hay hasta ahora.
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/12)] Permitir especificar cantidad de rondas
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/12)] Permitir especificar cantidad de rondas~~
 
-  Ahora mismo es algo "cableado", cuando debería ser algo especificable a nivel de interfaz. 
+  ~~Ahora mismo es algo "cableado", cuando debería ser algo especificable a nivel de interfaz.~~
   
   * Llegar a un balance (fórmula?) entre cantidad de jugadores y rondas a jugar
   
@@ -148,9 +148,9 @@
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/23)] Dejar saber cuántas preguntas por categorías hay
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/24)] Cambiar los _sliders_ del "_setup_" por (digamos) _textareas_
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/24)] Cambiar los _sliders_ del "_setup_" por (digamos) _textareas_~~
 
-  En vez de poner límites (y para colmo, anónimos), se puede poner un área editable para poner los nombres (digamos) uno por línea
+  ~~En vez de poner límites (y para colmo, anónimos), se puede poner un área editable para poner los nombres (digamos) uno por línea~~
 
 ---
 ## Otras ideas

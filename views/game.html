@@ -108,7 +108,7 @@
             }
         }
         function updateTimer() {
-            var maxTime = 10;
+            var maxTime = Game.timeout;
             var elapsed = stopwatch.currentTime()/1000;
             var remaining = 100 - Math.min(100, elapsed*100/maxTime);
             $('timer').style['height'] = remaining + '%';

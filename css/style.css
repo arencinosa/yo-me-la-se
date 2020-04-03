@@ -28,6 +28,32 @@
     font-family: 'Overlock', cursive;
 }
 
+.category-container {
+    /* border: solid 1px lightgray; */
+    /* border-radius: 4px; */
+    padding: 2px;
+    margin-bottom: 5px;
+}
+.category-container .custom-switch {
+    margin-left: 3px;
+}
+.category-container .custom-control-input + label {
+    color: #212529;
+    /* color: blue; */
+}
+.category-container .custom-control-input.collapsed + label {
+    color: gray;
+}
+.category-container .collapse textarea {
+    /*
+    * if applied by CSS takes effect
+    * ONLY after rendering it within
+    * its container
+    */
+    /* width: 100%; */
+    /* resize: none; */
+}
+
 #game-conf > div {
     margin-top: 20px;
 }
@@ -35,10 +61,22 @@
     width: 100%;
 }
 
-#game-conf .input-group-prepend input {
+#players-conf .input-group-prepend input {
     padding-left: 15px;
 }
 
+.error {
+    border-color: red;
+}
+#rounds-conf .conf-container {
+    margin-bottom: 1em;
+}
+#rounds-conf input[id$="-id"] {
+    background-color: white;
+}
+#rounds-conf input[type="range"] {
+    width: 100%;
+}
 .player {
     margin-bottom: 15px;
 }

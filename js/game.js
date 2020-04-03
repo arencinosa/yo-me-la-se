@@ -53,6 +53,13 @@ class Game {
     static get categories() {
         return Object.keys(Game._data);
     }
+    static getQuizzesAmount(category) {
+        var quizzes = Game._data[category];
+        if (quizzes) {
+            return quizzes.length;
+        }
+        return 0;
+    }
 
     constructor(category=null) {
         this.currentCategory = category;

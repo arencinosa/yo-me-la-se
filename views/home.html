@@ -1,118 +1,176 @@
 <div class="container"> 
     <div class="row">
-        <div class="col-12">
+        <div class="col-3">
             ¿Cuántos jugadores tendremos?
+        </div>
+        +
+        <div class="col-3">
+            ¿Cómo jugaremos?
+        </div>
+        +
+        <div class="col-3">
+            <button
+                id="setup-btn"
+                class="btn btn-primary"
+                onclick="setup()"
+            >
+                Configurar
+            </button>
         </div>
     </div>
     
-    <div id="game-conf"></div>
-
-    <button 
-        id="setup-btn"
-        class="btn btn-primary" 
-        onclick="setup()" 
-        style="margin-top: 40px;"
-        disabled="disabled"
-    >
-        Configurar
-    </button>
+    <div id="game-conf" class="row">
+        <div id="players-conf" class="col-3">
+        </div>
+        <div id="rounds-conf" class="col-3">
+        </div>
+    </div>
 
     <script>
-        $('game-name').textContent = gameName;
+        function init() {
+            $('game-name').textContent = gameName;
 
-        Game.categories.forEach(category => {
-            if (category == Game.WILDCARD_CATEGORY) {
-                return;
-            }
-
-            var container, row, col;
-
-            container = document.createElement('div');
-            container.className = 'container';
-            container.setAttribute('meta-category', category);
-            
-            row = document.createElement('div');
-            row.className = 'row';
-            container.appendChild(row);
-            
-            var ig = document.createElement('div');
-            ig.className = 'input-group';
-            row.appendChild(ig);
-
-            var igpp = document.createElement('div');
-            igpp.className = 'input-group-prepend';
-            ig.appendChild(igpp);
-
-            var label = document.createElement('span');
-            label.className = 'input-group-text';
-            label.textContent = category;
-            igpp.appendChild(label);
-
-            var counter = document.createElement('input');
-            counter.type = 'text';
-            counter.readOnly = true;
-            counter.className = 'form-control-plaintext counter';
-            counter.id = category;
-            counter.value = 0;
-            igpp.appendChild(counter);
-
-            row = document.createElement('div');
-            row.className = 'row';
-            container.appendChild(row);
-
-            var slider = document.createElement('input');
-            slider.className = 'slider';
-            slider.type = 'range';
-            slider.min = 0;
-            slider.max = 5;
-            slider.value = 0;
-            slider.addEventListener('input', function(){
-                $(category).value = slider.value;
-
-                var total_players = 0;
-                var sliders = document.getElementsByClassName('slider');
-                for (var i = 0; i < sliders.length; i++) {
-                    if (sliders[i].type == 'range') {
-                        total_players += Number(sliders[i].value);
-                    } else {
-                        console.log("ERROR: expecting only sliders but got " + sliders[i]);
-                    }
+            Game.categories.forEach(category => {
+                if (category == Game.WILDCARD_CATEGORY) {
+                    return;
                 }
-                $('setup-btn').disabled = (total_players == 0);
+
+                var idifiedCategory = 'i-'+category.replace(/ /g, '_');
+
+                var container = document.createElement('div');
+                container.className = 'category-container';
+
+                var switchDiv = document.createElement('div');
+                switchDiv.className = "custom-control custom-switch";
+                container.appendChild(switchDiv);
+
+                var input = document.createElement('input');
+                input.setAttribute('role', 'button');
+                input.setAttribute('data-toggle', 'collapse');
+                input.setAttribute('href', '#'+idifiedCategory+'-names');
+                input.type = "checkbox";
+                input.className = 'custom-control-input collapsed';
+                input.id = idifiedCategory+'-switch';
+                input.setAttribute('aria-expanded', false);
+                switchDiv.appendChild(input);
+
+                var label = document.createElement('label');
+                label.className = 'custom-control-label';
+                label.setAttribute('for', input.id);
+                label.textContent = category;
+                switchDiv.appendChild(label);
+
+                var collapsable = document.createElement('div');
+                collapsable.className = 'collapse';
+                collapsable.id = idifiedCategory+'-names';
+                container.appendChild(collapsable);
+
+                var textarea = document.createElement('textarea');
+                textarea.setAttribute('data-category', category);
+                textarea.rows = 5;
+                textarea.style.width = '100%';
+                textarea.style.resize = 'none';
+                collapsable.appendChild(textarea);
+                
+                $('players-conf').append(container);
             });
-            row.appendChild(slider);
 
-            $('game-conf').append(container);
-        });
+            [
+                {
+                    id: 'rounds',
+                    label: 'Rondas:',
+                    min: 1,
+                    max: 10,
+                    value: 3
+                },
+                {
+                    id: 'timeout',
+                    label: 'Tiempo para responder:',
+                    min: 1,
+                    max: 20,
+                    value: 10
+                }
+            ].forEach(conf => {
+                var container = document.createElement('div');
+                container.className = 'conf-container';
 
-        if (Number(getComputedStyle($('app')).opacity) != 1) {
-            // fadeIn($('app'));
-            $('app').style.opacity = 1;
+                var ig = document.createElement('div');
+                ig.className = 'input-group';
+                container.appendChild(ig);
+
+                var igp = document.createElement('div');
+                igp.className = 'input-group-prepend';
+                ig.appendChild(igp);
+
+                var span = document.createElement('span');
+                span.className = 'input-group-text';
+                span.id = conf.id + '-label';
+                span.textContent = conf.label;
+                igp.appendChild(span);
+
+                var it = document.createElement('input');
+                it.id = conf.id + '-id';
+                it.className = 'form-control';
+                it.type = 'text';
+                it.setAttribute('aria-describedby', span.id);
+                it.disabled = true;
+                it.value = conf.value;
+                ig.appendChild(it);
+
+                var ir = document.createElement('input');
+                ir.type = 'range';
+                ir.min = conf.min;
+                ir.max = conf.max;
+                ir.value = it.value;
+                ir.addEventListener('input', function(){
+                    it.value = ir.value;
+                });
+                container.appendChild(ir);
+
+                $('rounds-conf').appendChild(container);
+            });
+
+
+            if (Number(getComputedStyle($('app')).opacity) != 1) {
+                // fadeIn($('app'));
+                $('app').style.opacity = 1;
+            }
         }
 
         function setup() {
-            var counters = document.getElementsByClassName('counter');
+            $('rounds-id').classList.remove('error');
+            var rounds = Number($('rounds-id').value);
+            var textareas = $('players-conf').getElementsByTagName('textarea');
             var players = [];
-            for (var i = 0; i < counters.length; i++) {
-                var elem = counters[i];
-                var value = Number(elem.value);
-                if (value == 0) {
-                    continue;
+            var errors = false;
+            for (var i = 0; i < textareas.length; i++) {
+                var elem = textareas[i];
+                elem.classList.remove('error');
+                var category = elem.getAttribute('data-category');
+                var names = elem.value.split(/\n/).filter(n => n.length > 0);
+                if (Game.getQuizzesAmount(category) / names.length < rounds) {
+                    $('rounds-id').classList.add('error');
+                    elem.classList.add('error');
+                    errors = true;
                 }
-
-                var category = elem.id;
-                for (var j = 0; j < value; j++) {
+                for (var j = 0; j < names.length; j++) {
                     players.push({
-                        name: category + '-' + (j+1),
+                        name: names[j],
                         category: category
                     });
                 }
             }
-            // scheduler = new Scheduler(players);
-            scheduler.init(5, players);
+            if (players.length == 0 || errors) {
+                alert('Algo anda mal...');
+                return;
+            }
+            Game.timeout = Number($('timeout-id').value);
+            scheduler.init(rounds, players);
             fadeOut($('app'), function() {
                 window.location.hash = '#game';
             });
         }
+
+        init();
     </script>
 </div>
