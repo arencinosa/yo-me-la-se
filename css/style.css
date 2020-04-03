@@ -71,7 +71,7 @@
 #rounds-conf .conf-container {
     margin-bottom: 1em;
 }
-#rounds-conf input[id$="-id"] {
+#rounds-conf input[disabled] {
     background-color: white;
 }
 #rounds-conf input[type="range"] {

@@ -79,6 +79,8 @@
                 {
                     id: 'rounds',
                     label: 'Rondas:',
+                    prefix: '',
+                    sufix: '',
                     min: 1,
                     max: 10,
                     value: 3
@@ -86,6 +88,8 @@
                 {
                     id: 'timeout',
                     label: 'Tiempo para responder:',
+                    prefix: '',
+                    sufix: ' s',
                     min: 1,
                     max: 20,
                     value: 10
@@ -109,21 +113,21 @@
                 igp.appendChild(span);
 
                 var it = document.createElement('input');
-                it.id = conf.id + '-id';
                 it.className = 'form-control';
                 it.type = 'text';
                 it.setAttribute('aria-describedby', span.id);
                 it.disabled = true;
-                it.value = conf.value;
+                it.value = conf.prefix + conf.value + conf.sufix;
                 ig.appendChild(it);
 
                 var ir = document.createElement('input');
+                ir.id = conf.id + '-id';
                 ir.type = 'range';
                 ir.min = conf.min;
                 ir.max = conf.max;
-                ir.value = it.value;
+                ir.value = conf.value;
                 ir.addEventListener('input', function(){
-                    it.value = ir.value;
+                    it.value = conf.prefix + ir.value + conf.sufix;
                 });
                 container.appendChild(ir);
 
