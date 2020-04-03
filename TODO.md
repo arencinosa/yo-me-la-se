@@ -55,6 +55,8 @@
 ---
 ## Por mejorar
 
+* Utilizar los eventos del cronómetro en vez de usar `setTimeout` en  `games.js`
+
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/4)] Que el resumen quepa en la pantalla
 
   ...sin necesidad de cambiar el nivel de zoom en el navegador.
