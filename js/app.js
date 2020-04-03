@@ -1,7 +1,7 @@
 'use strict';
 
 var routes = {
-    home: new Route('home', 'home.html', true),
+    home: new Route('setup', 'setup.html', true),
     game: new Route('game', 'game.html', false),
     summary: new Route('summary', 'summary.html', false)
 };
