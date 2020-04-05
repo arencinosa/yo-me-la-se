@@ -57,9 +57,9 @@
 
 * Utilizar los eventos del cronómetro en vez de usar `setTimeout` en  `games.js`
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/4)] Que el resumen quepa en la pantalla
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/4)] Que el resumen quepa en la pantalla~~
 
-  ...sin necesidad de cambiar el nivel de zoom en el navegador.
+  ~~...sin necesidad de cambiar el nivel de zoom en el navegador.~~
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/5)] Cambiar el `alert` del final del juego por algo más _user-friendly_
 
@@ -75,7 +75,7 @@
 
   Correctas, tiempo, ..., no solo en su turno, sino en todo momento
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/6)] Mostrar estadísticas en el resumen
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/6)] Mostrar estadísticas en el resumen~~
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/17)] Dar la posibilidad de "corregir" el balance por jugador
 
@@ -114,9 +114,9 @@
 
   Al menos, el orden de respuestas correctas e incorrectas
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/20)] Hacer que los botones para avanzar estén siempre visibles
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/20)] Hacer que los botones para avanzar estén siempre visibles~~
 
-  Por ejemplo, el de "Configurar" queda al final de la lista de _sliders_
+  ~~Por ejemplo, el de "Configurar" queda al final de la lista de _sliders_~~
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/21)] Agregar "explicaciones" a las respuestas
 

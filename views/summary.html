@@ -1,33 +1,3 @@
-<style>
-    #results {
-        position: absolute;
-        display: inline;
-    }
-    .player-result {
-        margin-bottom: 1em;
-    }
-    .player-name {
-        /* font-size: xx-large; */
-        /* font-family: 'Overlock', cursive; */
-        display: inline-block;
-        width: 100%;
-    }
-    .player-name:hover {
-        color: brown;
-        cursor: pointer;
-    }
-    .ranking {
-        position: relative;
-        bottom: 8px;
-        z-index: -1;
-        background-color: #007bff;
-        opacity: 0.5;
-        border-radius: 2px;
-        /* width: 300px; */
-        height: 5px;
-    }
-</style>
-
 <div class="container-fluid">
     <div class="container">
         <div class="loadingio-spinner-ripple-bb4dp9har9i spinner">
@@ -85,8 +55,27 @@
             r.className = 'ranking';
             pr.appendChild(r);
 
+            var p = document.createElement('div');
+            p.className = 'ranking-percent text-right';
+            p.style.opacity = 0;
+            p.textContent = '0%';
+            pr.appendChild(p);
+
             $('results').appendChild(pr);
+            initialWidth = Math.max(initialWidth, pr.offsetWidth);
         }
+
+        var raceWindow = document.createElement('div');
+        raceWindow.className = 'race-window';
+        raceWindow.style.width = rankingWindow + 'px';
+        raceWindow.style.left = initialWidth + 'px';
+        $('results').appendChild(raceWindow);
+
+        var scale = maxHeight / parseFloat(getComputedStyle(raceWindow).height);
+        if (scale < 1) {
+            $('results').style.transform = 'scale(' + scale + ')';
+        }
+
         fadeOut(spinner, function(){
             setTimeout(startProgress, 1500);
         });
@@ -96,9 +85,11 @@
     var percent = percentInc;
     var initialWidth = 0;
     var rankingWindow = 600;
+    var maxHeight = 600;
     function setProgress(){
         var arr1 = document.getElementsByClassName('player-name');
         var arr2 = document.getElementsByClassName('ranking');
+        var pArr = document.getElementsByClassName('ranking-percent');
         for (var i = 0; i < scheduler.players.length; i++) {
             var stats = scheduler.players[i].stats;
             var maxTop = rankingWindow * stats.correctness;
@@ -106,6 +97,8 @@
             var x = initialWidth + maxTop*percent/100;
             arr1[i].style.width = x + 'px';
             arr2[i].style.width = x + 'px';
+            pArr[i].style.width = x + 'px';
+            pArr[i].textContent = (percent*stats.correctness).toFixed(0) + '%';
         }
         if (percent < 100) {
             percent = Math.min(percent + percentInc, 100);
@@ -113,19 +106,22 @@
         }
     }
     function startProgress() {
-        var arr = document.getElementsByClassName('player-name');
+        [
+            'player-name',
+            'ranking',
+            'raking-percent'
+        ].forEach(className => {
+            var arr = document.getElementsByClassName(className);
+            for (var i = 0; i < arr.length; i++) {
+                arr[i].style.width = initialWidth + 'px';
+            }
+        });
+        var arr = document.getElementsByClassName('ranking-percent');
         for (var i = 0; i < arr.length; i++) {
-            initialWidth = Math.max(initialWidth, arr[i].offsetWidth);
+            arr[i].style.opacity = 1;
         }
 
-        for (var i = 0; i < arr.length; i++) {
-            arr[i].style.width = initialWidth + 'px';
-        }
-        arr = document.getElementsByClassName('ranking');
-        for (var i = 0; i < arr.length; i++) {
-            arr[i].style.width = initialWidth + 'px';
-        }
-        setTimeout(setProgress, 100);
+        setTimeout(setProgress, 1000);
     }
 
 

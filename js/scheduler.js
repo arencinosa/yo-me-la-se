@@ -76,7 +76,6 @@ class Scheduler {
         var rnd = Math.random();
         if (rnd >= 0.7) {
             // let's try first with default (wildcard) game
-            console.log('*');
             arr = [
                 arr[1],
                 arr[0]

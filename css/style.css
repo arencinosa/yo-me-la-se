@@ -156,3 +156,42 @@
     color: #007bff;
     cursor: pointer;
 }
+
+#results {
+    transform-origin: left top;
+    position: absolute;
+    display: inline;
+}
+.player-result {
+    margin-bottom: 1em;
+}
+.player-name {
+    display: inline-block;
+    width: 100%;
+}
+.player-name:hover {
+    color: brown;
+    cursor: pointer;
+}
+.ranking {
+    position: relative;
+    bottom: 8px;
+    z-index: -1;
+    background-color: #007bff;
+    opacity: 0.5;
+    border-radius: 2px;
+    height: 5px;
+}
+.ranking-percent {
+    font-size: x-small;
+    margin-top: -1em;
+}
+.race-window {
+    z-index: -1;
+    border-left: dotted 1px gray;
+    border-right: dotted 1px gray;
+    position: absolute;
+    top: 0%;
+    height: 100%;
+}
+
