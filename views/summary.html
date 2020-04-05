@@ -77,11 +77,7 @@
             pn.title = 'Correctas: ' 
                         + scheduler.players[i].stats.correctAnswers 
                         + ' de '
-                        + (
-                            scheduler.players[i].stats.correctAnswers 
-                            + 
-                            scheduler.players[i].stats.wrongAnswers
-                        );
+                        + scheduler.players[i].stats.totalAnswers;
             pn.textContent = scheduler.players[i].name;
             pr.appendChild(pn);
 
@@ -99,13 +95,13 @@
     var percentInc = 2;
     var percent = percentInc;
     var initialWidth = 0;
+    var rankingWindow = 600;
     function setProgress(){
         var arr1 = document.getElementsByClassName('player-name');
         var arr2 = document.getElementsByClassName('ranking');
         for (var i = 0; i < scheduler.players.length; i++) {
             var stats = scheduler.players[i].stats;
-            var top = 300;
-            var maxTop = stats.correctAnswers * top / (stats.correctAnswers + stats.wrongAnswers);
+            var maxTop = rankingWindow * stats.correctness;
 
             var x = initialWidth + maxTop*percent/100;
             arr1[i].style.width = x + 'px';

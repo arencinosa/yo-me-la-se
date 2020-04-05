@@ -87,7 +87,7 @@
 
                 player.stats.addEventListener(GameStats.STATS_CHANGED_EVENT, updateBoardStats);
                 player.stats.addEventListener(GameStats.STATS_CHANGED_EVENT, function() {
-                    stat.textContent = Math.floor(player.stats.correctAnswers*100 / (player.stats.correctAnswers+player.stats.wrongAnswers)) + '%';
+                    stat.textContent = Math.floor(100*player.stats.correctness) + '%';
                 });
                 $('players').appendChild(div);
             });

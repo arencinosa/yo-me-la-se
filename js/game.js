@@ -22,6 +22,13 @@ function initGameData(callback) {
 class GameStats extends GenericEventHandler {
     static get STATS_CHANGED_EVENT() { return 'stats_changed'};
 
+    get totalAnswers() {
+        return this.correctAnswers + this.wrongAnswers;
+    }
+    get correctness() {
+        return (this.correctAnswers / this.totalAnswers).toFixed(2);
+    }
+
     constructor() {
         super();
         this.wrongAnswers = 0;
