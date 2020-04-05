@@ -55,6 +55,10 @@
 ---
 ## Por mejorar
 
+* Cambiar las llaves del JSON de entrada
+
+  Eso de `p` y `o` no se explica mucho.
+
 * Dar la opción de aleatorizar o no el orden de los jugadores
 
   Varios niveles aquí:
