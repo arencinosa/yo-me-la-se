@@ -55,6 +55,16 @@
 ---
 ## Por mejorar
 
+* Dar la opción de aleatorizar o no el orden de los jugadores
+
+  Varios niveles aquí:
+
+  * Aleatorizar el orden de las categorías
+
+  * Aleatorizar el orden de los jugadores dentro de las categorías
+
+  * Permitir intercalar jugadores de diferentes categorías
+
 * Utilizar los eventos del cronómetro en vez de usar `setTimeout` en  `games.js`
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/4)] Que el resumen quepa en la pantalla~~
@@ -168,6 +178,8 @@
 * Seguir avanzando hasta equivocarse
 
    Sería hacer que el turno terminara sólo al equivocarnos.
+
+* Responder todas las preguntas que se pueda en un tiempo límite
 
 ---
 ## Comentarios
