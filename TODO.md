@@ -160,7 +160,7 @@
 
     ...para dar méritos a quien sugirió la pregunta (o para hacerlo responsable :P)
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/23)] Dejar saber cuántas preguntas por categorías hay
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/23)] Dejar saber cuántas preguntas por categorías hay~~
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/24)] Cambiar los _sliders_ del "_setup_" por (digamos) _textareas_~~
 
