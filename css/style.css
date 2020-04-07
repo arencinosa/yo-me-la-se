@@ -38,7 +38,7 @@
     margin-left: 3px;
 }
 .category-container .custom-control-input + label {
-    color: #212529;
+    color: #495057;
     /* color: blue; */
 }
 .category-container .custom-control-input.collapsed + label {
@@ -46,6 +46,7 @@
 }
 .category-container .custom-control-input + label + .quiz-amount {
     margin-left: 3px;
+    font-size: xx-small;
 }
 .category-container .custom-control-input.collapsed + label + .quiz-amount {
     background-color: lightgray;

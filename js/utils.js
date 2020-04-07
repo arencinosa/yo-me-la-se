@@ -107,3 +107,17 @@ function fadeOut(elem, callback=null) {
         }
     });
 }
+
+function pluralize(amount, singular, plural=null) {
+    if (amount == 1) {
+        return amount + ' ' + singular;
+    }
+    if (plural) {
+        return amount + ' ' + plural;
+    }
+    var ending = 's';
+    if (singular.substr(-1) == 's') {
+        ending = 'es';
+    }
+    return amount + ' ' + singular + ending;
+}
