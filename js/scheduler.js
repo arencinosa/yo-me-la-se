@@ -3,39 +3,40 @@
 class Scheduler {
     get wildcardGame() { return this.games[Game.WILDCARD_CATEGORY]; }
     
-    constructor(gameName, players=null) {
+    constructor(gameName, players=null, randomize=true) {
         this.gameName = gameName;
         Math.seedrandom(gameName);
 
         this.games = {};
         this.games[Game.WILDCARD_CATEGORY] = new Game(Game.WILDCARD_CATEGORY);
-        this.init(0, players);
+        this.init(0, players, randomize);
     }
 
-    init(rounds, players=null) {
+    init(rounds, players=null, randomize=true) {
         var wcGame = this.wildcardGame;
         wcGame.reset();
         this.games = {};
         this.games[Game.WILDCARD_CATEGORY] = wcGame;
         this.wildcardTurn = false;
+        this.players = [];
 
-        this.players = (players) ? shuffle(deepCopy(players)) : [];
-        this.players.forEach(player => {
-            player.stats = new GameStats();
-            
-            if (this.games[player.category]) {
-                this.games[player.category].activePlayers++;
-                return;
-            }
-            this.games[player.category] = new Game(player.category);
-            this.games[player.category].activePlayers = 1;
-        });
         if (!players) {
             return;
         }
 
+        deepCopy(players).forEach(player => {
+            player.stats = new GameStats();
+            
+            if (this.games[player.category]) {
+                this.games[player.category].players.push(player);
+                return;
+            }
+            this.games[player.category] = new Game(player.category);
+            this.games[player.category].players = [ player ];
+        });
         this.rounds = rounds;
-        Object.keys(this.games).forEach(cat => {
+        var categories = Object.keys(this.games).filter(x => x != '*');
+        categories.forEach(cat => {
             if (cat == Game.WILDCARD_CATEGORY) {
                 return;
             }
@@ -44,10 +45,43 @@ class Scheduler {
                             Math.floor(
                                 this.games[cat].getQuizzes().length 
                                 / 
-                                this.games[cat].activePlayers
+                                this.games[cat].players.length
                             )
                         );
         });
+        if (randomize == true || randomize.shuffleCategories) {
+            shuffle(categories);
+        }
+        if (randomize == true || randomize.shufflePlayers) {
+            categories.forEach(cat => {
+                shuffle(this.games[cat].players);
+            });
+        }
+        if (randomize == true || randomize.mergeCategories) {
+            // I will over-complicate this in order
+            // to be as respectful as possible with
+            // the expected behavior (couldn't find
+            // a better way)
+            var playersList = [];
+            categories.forEach(cat => {
+                playersList.push(this.games[cat].players);
+            });
+            var i;
+            while (playersList.length != 0) {
+                i = randInt(0, playersList.length-1);
+                this.players.push(playersList[i].shift());
+                if (playersList[i].length == 0) {
+                    playersList.splice(i,1);
+                }
+            }
+        } else {
+            categories.forEach(cat => {
+                this.games[cat].players.forEach(player => {
+                    this.players.push(player);
+                });
+            });
+        }
+
         this.players[this.players.length-1].stats.addEventListener(
             GameStats.STATS_CHANGED_EVENT, 
             function() {

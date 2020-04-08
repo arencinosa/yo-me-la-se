@@ -76,14 +76,36 @@
     border-color: red;
 }
 #rounds-conf .conf-container {
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 }
-#rounds-conf input[disabled] {
+#rounds-conf .conf-container input[disabled] {
     background-color: white;
 }
-#rounds-conf input[type="range"] {
+#rounds-conf .conf-container input[type="range"] {
     width: 100%;
 }
+#rounds-conf .group-container {
+    border: solid 1px #ced4da;
+    border-radius: 0.25rem;
+    padding: 10px;
+    padding-top: 15px;
+    position: relative;
+}
+
+#rounds-conf .group-container .group-header {
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: white;
+    position: absolute;
+    top: -0.8em;
+    left: 6px;
+    color: #495057;
+}
+#rounds-conf .group-container .form-check-label {
+    padding-left: 5px;
+    color: #495057;
+}
+
 .player {
     margin-bottom: 15px;
 }

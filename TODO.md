@@ -59,15 +59,15 @@
 
   Eso de `p` y `o` no se explica mucho.
 
-* Dar la opción de aleatorizar o no el orden de los jugadores
+* ~~Dar la opción de aleatorizar o no el orden de los jugadores~~
 
-  Varios niveles aquí:
+  ~~Varios niveles aquí:~~
 
-  * Aleatorizar el orden de las categorías
+  * ~~Aleatorizar el orden de las categorías~~
 
-  * Aleatorizar el orden de los jugadores dentro de las categorías
+  * ~~Aleatorizar el orden de los jugadores dentro de las categorías~~
 
-  * Permitir intercalar jugadores de diferentes categorías
+  * ~~Permitir intercalar jugadores de diferentes categorías~~
 
 * Utilizar los eventos del cronómetro en vez de usar `setTimeout` en  `games.js`
 
