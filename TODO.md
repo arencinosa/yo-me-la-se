@@ -55,6 +55,8 @@
 ---
 ## Por mejorar
 
+* Hacer una clase "Jugador"
+
 * Cambiar las llaves del JSON de entrada
 
   Eso de `p` y `o` no se explica mucho.
