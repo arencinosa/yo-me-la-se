@@ -1,78 +1,87 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/spinner-bars.css">
-    <link rel="stylesheet" href="css/ripple.css">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body onload="setTimeout(initApp, 2000)">
-        
-    <div class="container-fluid" style="margin-top: 40px;">
-      <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 id="game-name"></h1>
-                <hr/> 
-                <br/>
-            </div>
-        </div>
-      </div>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-      <div id="app">
-          <!-- actual content -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/spinner-bars.css">
+        <link rel="stylesheet" href="css/ripple.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
 
-          <div class="container-fluid">
+    <body onload="setTimeout(initApp, 2000)">
+        <div class="container-fluid" style="margin-top: 40px;">
             <div class="container">
-                <div class="loadingio-spinner-ripple-bb4dp9har9i spinner">
-                    <div class="ldio-16a7fmmm635">
-                      <div></div>
-                      <div></div>
+                <div class="row">
+                    <div class="col-12">
+                        <h1 id="game-name"></h1>
+                        <hr />
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+            <div id="app">
+                <!-- actual content -->
+
+                <div class="container-fluid">
+                    <div class="container">
+                        <div class="loadingio-spinner-ripple-bb4dp9har9i spinner">
+                            <div class="ldio-16a7fmmm635">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        <div class="pseudo-progress text-center">
+                            <div id="progress-text">Inicializando el juego...</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="pseudo-progress text-center">
-                  <div id="progress-text">Inicializando el juego...</div>
-                </div>
             </div>
-          </div>
+        </div>
 
-      </div>
-    </div>
+        <script>
+            window.location.hash = '';
+            const gameName = '¡Yo me la sé!';
 
-    <script>
-      window.location.hash = '';
-      const gameName = '¡Yo me la sé!';
+            document.title = gameName;
+            document.getElementById('game-name').innerText = gameName;
+        </script>
 
-      document.title = gameName;
-      document.getElementById('game-name').innerText = gameName;
-    </script>
+        <!-- Optional JavaScript -->
+        <script src="http://davidbau.com/encode/seedrandom.min.js"></script>
+        <script>
+            // Math.seedrandom(gameName);
+            Math.seedrandom();
+        </script>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 
-    <!-- Optional JavaScript -->
-    <script src="http://davidbau.com/encode/seedrandom.min.js"></script>
-    <script>
-      // Math.seedrandom(gameName);
-      Math.seedrandom();
-    </script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
-    <link href="https://fonts.googleapis.com/css?family=Overlock&display=swap" rel="stylesheet">
-    
-    <script src="js/genericeventhandler.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/stopwatch.js"></script>
-    <script src="js/route.js"></script>
-    <script src="js/router.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/scheduler.js"></script>
-    <script src="js/app.js"></script>
-  </body>
+        <link href="https://fonts.googleapis.com/css?family=Overlock&display=swap" rel="stylesheet">
+
+        <script src="js/genericeventhandler.js"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/stopwatch.js"></script>
+        <script src="js/route.js"></script>
+        <script src="js/router.js"></script>
+        <script src="js/game.js"></script>
+        <script src="js/scheduler.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+
 </html>
