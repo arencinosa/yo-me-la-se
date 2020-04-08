@@ -192,9 +192,9 @@
             $('player-name').textContent = player.name;
             updateBoardStats();
 
-            $('question').innerHTML = quiz.p;
+            $('question').innerHTML = quiz.question;
             $('options').innerHTML = '';
-            var columnWidth = Math.floor(12 / quiz.o.length) - 1;
+            var columnWidth = Math.floor(12 / quiz.options.length) - 1;
             if (columnWidth < 1) {
                 columnWidth = 3;
             }
@@ -202,7 +202,7 @@
             var row = document.createElement('div');
             row.className = 'row';
             $('options').appendChild(row);
-            var answers = shuffle(deepCopy(quiz.o));
+            var answers = shuffle(deepCopy(quiz.options));
             for(var i = 0; i < answers.length; i++) {
                 var r = document.createElement('button');
                 r.type = 'button';

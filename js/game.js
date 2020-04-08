@@ -9,7 +9,7 @@ function initGameData(callback) {
     .then((json) => {
         var gd = {};
         Object.keys(json).forEach(cat => {
-            var qs = json[cat].filter(x => x.p != null && x.p != "");
+            var qs = json[cat].filter(x => x.question != null && x.question != "");
             if (qs.length > 0) {
                 gd[cat] = shuffle(qs);
             }
@@ -106,7 +106,7 @@ class Game {
     }
 
     checkAnswer(answer, gameStats=null) {
-        if (answer == this.currentQuiz().o[0]) {
+        if (answer == this.currentQuiz().options[0]) {
             if (gameStats) {
                 gameStats.newCorrectAnswer();
             }

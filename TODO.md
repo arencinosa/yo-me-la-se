@@ -57,9 +57,9 @@
 
 * Hacer una clase "Jugador"
 
-* Cambiar las llaves del JSON de entrada
+* ~~Cambiar las llaves del JSON de entrada~~
 
-  Eso de `p` y `o` no se explica mucho.
+  ~~Eso de `p` y `o` no se explica mucho.~~
 
 * ~~Dar la opción de aleatorizar o no el orden de los jugadores~~
 
