@@ -79,9 +79,9 @@
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/5)] Cambiar el `alert` del final del juego por algo más _user-friendly_
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/14)] Que el tiempo que va quedando cambie de color
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/14)] Que el tiempo que va quedando cambie de color~~
 
-  Que vaya de verde a rojo, según se vaya agotando el tiempo
+  ~~Que vaya de verde a rojo, según se vaya agotando el tiempo~~
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/15)] Dar más estadísticas de tiempo
 

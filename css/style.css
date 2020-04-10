@@ -168,10 +168,31 @@
     width: 10px;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 #timer {
     background-color: gray;
     margin-top: auto;
+}
+#timer.animated {
+    animation-timing-function: linear;
+    animation-name: timer;
+}
+@keyframes timer {
+    from {
+        height: 100%;
+        background-color: green;
+    }
+
+    50% {
+        height: 50%;
+        background-color: yellow;
+    }
+
+    to {
+        height: 0%;
+        background-color: red;
+    }
 }
 
 #next-btn {

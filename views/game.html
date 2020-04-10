@@ -92,6 +92,9 @@
                 $('players').appendChild(div);
             });
 
+            $('timer').addEventListener("animationend", whenTimeout);
+            $('timer').style.animationDuration = Game.timeout + 's';
+
             if (Number(getComputedStyle($('app')).opacity) != 1) {
                 // fadeIn($('app'));
                 $('app').style.opacity = 1;
@@ -100,6 +103,37 @@
                 }, 500);
             }
         }
+        function resetTimer() {
+            $('timer').style.animationPlayState = 'paused';
+            $('timer').classList.remove('animated');
+            void $('timer').offsetWidth;
+            $('timer').classList.add('animated');
+        }
+        function pauseTimer() {
+            $('timer').style.animationPlayState = 'paused';
+        }
+        function startTimer() {
+            $('timer').style.animationPlayState = 'running';
+        }
+        function whenTimeout() {
+            pauseTimer();
+
+            var btns = document.getElementsByClassName('response');
+            var game = scheduler.currentGame();
+            for(var i = 0; i < btns.length; i++) {
+                btns[i].disabled = true;
+                var answerStyle = 'btn-danger';
+                if (game.checkAnswer(btns[i].textContent)) {
+                    answerStyle = 'btn-success';
+                }
+                btns[i].classList.remove('btn-light');
+                btns[i].classList.add(answerStyle);
+            }
+            var player = scheduler.currentPlayer();
+            player.stats.newWrongAnswer();
+            $('next-btn').classList.remove('d-none');
+        }
+
         function updateBoardStats(e=null) {
             var player = scheduler.currentPlayer();
             if (!e || e.instance == player.stats) {
@@ -107,40 +141,14 @@
                 $('wrong').textContent = player.stats.wrongAnswers;
             }
         }
-        function updateTimer() {
-            var maxTime = Game.timeout;
-            var elapsed = stopwatch.currentTime()/1000;
-            var remaining = 100 - Math.min(100, elapsed*100/maxTime);
-            $('timer').style['height'] = remaining + '%';
-            if (remaining == 0) {
-                stopwatch.stop();
-                var btns = document.getElementsByClassName('response');
-                var game = scheduler.currentGame();
-                for(var i = 0; i < btns.length; i++) {
-                    btns[i].disabled = true;
-                    var answerStyle = 'btn-danger';
-                    if (game.checkAnswer(btns[i].textContent)) {
-                        answerStyle = 'btn-success';
-                    }
-                    btns[i].classList.remove('btn-light');
-                    btns[i].classList.add(answerStyle);
-                }
-                var player = scheduler.currentPlayer();
-                player.stats.newWrongAnswer();
-                $('next-btn').classList.remove('d-none');
-            }
-            if (stopwatch.status != stopwatch.STOPPED) {
-                setTimeout(updateTimer, 30);
-            }
-        }
         function showOptions() {
             $('show-options').classList.add('d-none');
             $('options').classList.remove('d-none');
-            stopwatch.start();
-            updateTimer();
+            startTimer();
         }
         function checkResponse(btn) {
-            stopwatch.stop();
+            pauseTimer();
+
             $('next-btn').classList.remove('d-none');
             
             var btns = document.getElementsByClassName('response');
@@ -159,7 +167,6 @@
         }
         function next() {
             $('next-btn').classList.add('d-none');
-            stopwatch.reset();
 
             var status = scheduler.next();
             if (! status) {
@@ -173,7 +180,6 @@
 
             $('show-options').classList.remove('d-none');
             $('options').classList.add('d-none');
-            $('timer').style['height'] = '0%';
 
             var playersList = document.getElementsByClassName('player');
             for (var i = 0; i < playersList.length; i++) {
@@ -216,6 +222,7 @@
 
                 row.appendChild(col);
             }
+            resetTimer();
         }
 
         function start() {
@@ -234,6 +241,5 @@
         }
 
         init();
-        const stopwatch = new StopWatch();
     </script>
 </div>
