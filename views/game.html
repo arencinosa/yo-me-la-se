@@ -1,5 +1,11 @@
 <div class="container">
     <div class="row">
+        <div id='rounds' class="small col-12">
+            <div id='rounds-counter'></div>
+            <div id='rounds-progress'></div>
+        </div>
+    </div>
+    <div class="row">
         <div id="players" class="col-2"></div>
 
         <div id="board" class="col-7">
@@ -28,7 +34,7 @@
                         </div>
                     </div>
 
-                    <div class="col-3 border border-dotted border-danger rounded-lg">
+                    <div id="wrong-box" class="col-3 border border-dotted border-danger rounded-lg">
                         <div class="stat-label text-uppercase">
                             Incorrectas:
                         </div>
@@ -36,14 +42,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="questionaire" class="jumbotron col-7 d-none">
                 <div>
                     <svg id="next-btn" onclick="next()" class="bi bi-caret-right-fill d-none" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 011.659-.753l5.48 4.796a1 1 0 010 1.506z"/>
                     </svg>
                 </div>
-
+                <!-- <h2 id='rounds-counter' class="display-6"></h2> -->
                 <h2 id='player-name' class="display-4"></h2>
                 <p id="question" class="lead"></p>
                 <hr class="my-4"/>
@@ -56,6 +62,8 @@
     </div>
     
     <script>
+        var roundCount = 0;
+
         function init() {
             if (scheduler.players.length == 0) {
                 window.location.hash = '#home';
@@ -97,6 +105,74 @@
                 $('app').style.opacity = 1;
                 setTimeout(function(){
                     fadeIn($('ready-btn'));
+                }, 500);
+            }
+        }
+        function createRoundStats() {
+            var totalRounds = scheduler.getTotalRounds();
+            var progressBarLength = widthProgressBar(totalRounds);
+
+            //alert(progressBarLength);
+
+            roundCount = 0;
+
+            $('rounds-counter').textContent = "Ronda 1 de " + totalRounds;
+
+            for(var i = 0; i < totalRounds; i++) {
+
+                var div = document.createElement('div');
+                div.id = "progress-container-" + i;
+                div.className = 'progress-container';
+                div.style['width'] = progressBarLength + 'px';
+                var div2 = document.createElement('div');
+                div2.id = "progress-bar-" + i;
+                div2.className = "myprogress-bar";
+                div2.style['width'] = '0%';
+                div2.style['height'] = "100%";
+                div2.style['background-color'] = "#28a745";
+                div.appendChild(div2);
+                $('rounds-progress').appendChild(div);
+            }
+
+
+            $('rounds').style.opacity = 0;
+        }
+        function widthProgressBar(totalRounds) {
+            var startPosition = $('rounds-progress').getBoundingClientRect();
+            var endPosition = $('wrong-box').getBoundingClientRect();
+            var totalLength = endPosition.x + endPosition.width - startPosition.x;
+
+            return ((totalLength - (totalRounds - 1) * 2))/totalRounds;
+        }
+        function updateRoundStats() {
+            var playerIndex = scheduler.currentPlayerIndex();
+            var totalPlayers = scheduler.getTotalPlayers();
+            var totalRounds = scheduler.getTotalRounds();
+
+            // First player => new round
+            if(playerIndex == 0) {
+                roundCount ++;
+            }
+            // $('progress-container-0').style['background-color'] = "#28a745";
+            $('rounds-counter').textContent = "Ronda " + roundCount + " de " + totalRounds;
+
+            // Fill rounds done
+            for(var i = 0; i < roundCount - 1; i++) {
+                $('progress-bar-' + i).style['width'] = '100%';
+            }
+
+            // Fill current round
+            var pos = roundCount - 1;
+            var progress_bar_id = 'progress-bar-' + pos;
+            $(progress_bar_id).style['width'] = (((playerIndex + 1) * 100) / totalPlayers ) + '%';
+
+            // $('progress-bar-0').style['height'] = '100%';
+
+            // Show the hidden <div> with id='rounds'
+            if (Number(getComputedStyle($('rounds')).opacity) != 1) {
+                $('rounds').style.opacity = 1;
+                setTimeout(function(){
+                    fadeIn($('rounds'));
                 }, 500);
             }
         }
@@ -216,12 +292,14 @@
 
                 row.appendChild(col);
             }
+            updateRoundStats();
         }
 
         function start() {
             fadeOut($('ready-btn'), function(){
                 $('ready-btn').className = 'd-none';
                 $('stats').classList.remove('d-none');
+                createRoundStats();
                 fadeIn($('stats'), function(){
                     setTimeout(function(){
                         next();

@@ -131,6 +131,21 @@
     color: #dc3545;
 }
 
+#rounds-counter{
+    height: 14px;
+    padding-left: 3px;
+}
+#rounds-progress {
+    height: 10px;
+    margin-bottom: 20px;
+}
+.progress-container {
+    display:inline-block;
+    height: 100%;
+    border-radius: 4px;
+    border: solid 1px gray;
+    margin-right: 2px;
+}
 #timer-container {
     height: 100%;
     border-radius: 6px;
