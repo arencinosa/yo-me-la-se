@@ -200,6 +200,9 @@
             for (var i = 0; i < textareas.length; i++) {
                 var elem = textareas[i];
                 elem.classList.remove('error');
+                if (! elem.parentElement.classList.contains('show')) {
+                    continue;
+                }
                 var category = elem.getAttribute('data-category');
                 var names = elem.value.split(/\n/).filter(n => n.length > 0);
                 if (Game.getQuizzesAmount(category) / names.length < rounds) {

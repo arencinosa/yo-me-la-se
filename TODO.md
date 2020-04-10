@@ -3,12 +3,12 @@
 
 ---
 ## BUGS
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/31)] Desactivar una categoría no ignora los jugadores declarados
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/31)] Desactivar una categoría no ignora los jugadores declarados~~
 
-  Se están teniendo en cuenta los jugadores declarados en una categoría aún si se desactiva (la categoría. Entonces:
+  ~~Se están teniendo en cuenta los jugadores declarados en una categoría aún si se desactiva (la categoría. Entonces:~~
 
-  * o bien se borran al desactivar (o antes de activar);
-  * o bien se ignoran durante el proceso de configuración.
+  * ~~o bien se borran al desactivar (o antes de activar);~~
+  * ~~o bien se ignoran durante el proceso de configuración.~~
 
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/1)] Si se le hace `click` a un botón en medio de un `fade` se cae en una especie de ciclo infinito de opacidad.~~
