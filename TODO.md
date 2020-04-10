@@ -3,6 +3,8 @@
 
 ---
 ## BUGS
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/32)] Hacer más _responsive_ el diseño
+
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/31)] Desactivar una categoría no ignora los jugadores declarados~~
 
   ~~Se están teniendo en cuenta los jugadores declarados en una categoría aún si se desactiva (la categoría. Entonces:~~
@@ -21,6 +23,10 @@
 
 ---
 ## Por hacer
+* Configurar la cantidad de opciones disponibles por cada pregunta
+
+  Esto se puede usar para regular el nivel de dificultad del juego, disminuyendo la probabilidad de acertar si no se tiene certeza sobre la respuesta.
+
 * ~~Usar las preguntas de la categoría `*` (random >= 0.7?)~~
 
   ~~La idea es usarlas como comodín, para cualquier categoría/nivel.~~
@@ -62,6 +68,9 @@
 
 ---
 ## Por mejorar
+* Crear un ícono
+
+* Crear "secciones" en las conclusiones, algo como "Excelente", "Muy bien", "Mejorable", "¿Dormido?", ...
 
 * Cambiar la forma en que se manejan los errores del "_setup_"
 
