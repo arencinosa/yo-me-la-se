@@ -63,6 +63,10 @@
 ---
 ## Por mejorar
 
+* Cambiar la forma en que se manejan los errores del "_setup_"
+
+  Ahora mismo hay un `alert` y un estilo de bordes rojos, pero no hay más mensajes explicativos.
+
 * ~~El texto de cantidad de preguntas por categoría no es parte del label del _switch_~~
 
   ~~...y por tanto, no se puede dar _click_ encima para activar/desactivar el _switch_~~
