@@ -87,7 +87,7 @@
 
   * ~~Permitir intercalar jugadores de diferentes categorías~~
 
-* Utilizar los eventos del cronómetro en vez de usar `setTimeout` en  `games.js`
+* Utilizar los eventos del cronómetro en vez de usar `setTimeout`
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/4)] Que el resumen quepa en la pantalla~~
 
