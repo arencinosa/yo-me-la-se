@@ -55,9 +55,9 @@
 ---
 ## Por mejorar
 
-* El texto de cantidad de preguntas por categoría no es parte del label del _switch_
+* ~~El texto de cantidad de preguntas por categoría no es parte del label del _switch_~~
 
-  ...y por tanto, no se puede dar _click_ encima para activar/desactivar el _switch_
+  ~~...y por tanto, no se puede dar _click_ encima para activar/desactivar el _switch_~~
 
 * Hacer una clase "Jugador"
 

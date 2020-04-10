@@ -63,7 +63,7 @@
                 var badge = document.createElement('div');
                 badge.className = 'badge badge-pill badge-secondary quiz-amount';
                 badge.textContent = pluralize(Game.getQuizzesAmount(category), 'pregunta');
-                switchDiv.appendChild(badge);
+                label.appendChild(badge);
 
                 var collapsable = document.createElement('div');
                 collapsable.className = 'collapse';

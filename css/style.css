@@ -44,11 +44,11 @@
 .category-container .custom-control-input.collapsed + label {
     color: gray;
 }
-.category-container .custom-control-input + label + .quiz-amount {
+.category-container .custom-control-input + label .quiz-amount {
     margin-left: 3px;
     font-size: xx-small;
 }
-.category-container .custom-control-input.collapsed + label + .quiz-amount {
+.category-container .custom-control-input.collapsed + label .quiz-amount {
     background-color: lightgray;
 }
 .category-container .collapse textarea {
