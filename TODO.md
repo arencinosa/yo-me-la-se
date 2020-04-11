@@ -68,6 +68,11 @@
 
 ---
 ## Por mejorar
+
+* Permitir "posponer" una pregunta
+
+  Quizás ya le salió a ese jugador, o quizás fue él mismo quien la propuso.
+
 * Crear un ícono
 
 * Crear "secciones" en las conclusiones, algo como "Excelente", "Muy bien", "Mejorable", "¿Dormido?", ...
