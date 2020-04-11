@@ -23,6 +23,7 @@
 
 ---
 ## Por hacer
+
 * Configurar la cantidad de opciones disponibles por cada pregunta
 
   Esto se puede usar para regular el nivel de dificultad del juego, disminuyendo la probabilidad de acertar si no se tiene certeza sobre la respuesta.
@@ -69,9 +70,11 @@
 ---
 ## Por mejorar
 
+* Darle el foco al _textarea_ de los jugadores al activar una categoría
+
 * Permitir "posponer" una pregunta
 
-  Quizás ya le salió a ese jugador, o quizás fue él mismo quien la propuso.
+  Quizás ya le salió a ese jugador, o quizás fue él mismo quien la propuso (o peor, no es una pregunta acorde a la persona, como pedirle a un daltónico que diferencie colores).
 
 * Crear un ícono
 
