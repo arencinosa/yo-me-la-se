@@ -1,22 +1,22 @@
 {
     "*": [
         {
-            "p": "¿De qué color es el caballo blanco de Maceo?",
-            "o": [
+            "question": "¿De qué color es el caballo blanco de Maceo?",
+            "options": [
                 "Blanco",
                 "Negro"
             ]
         },
         {
-            "p": "El padre de María tiene 5 hijos: Lala, Lele, Lili, Lolo, y...",
-            "o": [
+            "question": "El padre de María tiene 5 hijos: Lala, Lele, Lili, Lolo, y...",
+            "options": [
                 "María",
                 "Lulu"
             ]
         },
         {
-            "p": "Adivina: \"Oro parece, plata no es, quien no lo adivine ¡bien bobo es¡\"",
-            "o": [
+            "question": "Adivina: \"Oro parece, plata no es, quien no lo adivine ¡bien bobo es¡\"",
+            "options": [
                 "El plátano",
                 "El sol"
             ]
@@ -24,29 +24,29 @@
     ],
     "preescolar": [
         {
-            "p": "¿Qué objeto pesa más?",
-            "o": [
+            "question": "¿Qué objeto pesa más?",
+            "options": [
                 "Una silla",
                 "Un par de espejuelos"
             ]
         },
         {
-            "p": "¿Cuál de estos animales no sabe nadar?",
-            "o": [
+            "question": "¿Cuál de estos animales no sabe nadar?",
+            "options": [
                 "La mariposa",
                 "El pez"
             ]
         },
         {
-            "p": "¿Quién trabaja en el hospital?",
-            "o": [
+            "question": "¿Quién trabaja en el hospital?",
+            "options": [
                 "La enfermera",
                 "El policía"
             ]
         },
         {
-            "p": "¿Cuál de estos insectos liba las flores?",
-            "o": [
+            "question": "¿Cuál de estos insectos liba las flores?",
+            "options": [
                 "La abeja",
                 "La mosca"
             ]
@@ -54,15 +54,15 @@
     ],
     "1er grado": [
         {
-            "p": "¿Qué letra le sigue a la F?",
-            "o": [
+            "question": "¿Qué letra le sigue a la F?",
+            "options": [
                 "G",
                 "E"
             ]
         },
         {
-            "p": "¿Cuánto hay que sumarle a 12 para que dé 21?",
-            "o": [
+            "question": "¿Cuánto hay que sumarle a 12 para que dé 21?",
+            "options": [
                 9,
                 11
             ]

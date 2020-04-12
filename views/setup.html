@@ -60,6 +60,11 @@
                 label.textContent = category;
                 switchDiv.appendChild(label);
 
+                var badge = document.createElement('div');
+                badge.className = 'badge badge-pill badge-secondary quiz-amount';
+                badge.textContent = pluralize(Game.getQuizzesAmount(category), 'pregunta');
+                label.appendChild(badge);
+
                 var collapsable = document.createElement('div');
                 collapsable.className = 'collapse';
                 collapsable.id = idifiedCategory+'-names';
@@ -134,6 +139,51 @@
 
                 $('rounds-conf').appendChild(container);
             });
+            
+            var groupContainer = document.createElement('div');
+            groupContainer.className = 'conf-container group-container';
+
+            var groupHeader = document.createElement('span');
+            groupHeader.className = 'group-header';
+            groupHeader.textContent = 'Aleatorizar';
+            groupContainer.appendChild(groupHeader);
+
+            [
+                {
+                    id: 'shuffle-categories',
+                    label: 'Orden de las categorías',
+                    checked: true
+                },
+                {
+                    id: 'shuffle-players',
+                    label: 'Jugadores por categorías',
+                    checked: true
+                },
+                {
+                    id: 'merge-categories',
+                    label: 'Intercalar categorías',
+                    checked: true
+                }
+            ].forEach(rndOption => {
+                var checkContainer = document.createElement('div');
+                checkContainer.className = 'form-check';
+                
+                var input = document.createElement('input');
+                input.className = 'form-check-input';
+                input.type = 'checkbox';
+                input.checked = rndOption.checked;
+                input.id = rndOption.id;
+                checkContainer.appendChild(input);
+                
+                var label = document.createElement('label');
+                label.className = 'form-check-label';
+                label.setAttribute('for', input.id);
+                label.textContent = rndOption.label;
+                checkContainer.appendChild(label);
+
+                groupContainer.appendChild(checkContainer);
+            });
+            $('rounds-conf').appendChild(groupContainer);
 
 
             if (Number(getComputedStyle($('app')).opacity) != 1) {
@@ -151,6 +201,9 @@
             for (var i = 0; i < textareas.length; i++) {
                 var elem = textareas[i];
                 elem.classList.remove('error');
+                if (! elem.parentElement.classList.contains('show')) {
+                    continue;
+                }
                 var category = elem.getAttribute('data-category');
                 var names = elem.value.split(/\n/).filter(n => n.length > 0);
                 if (Game.getQuizzesAmount(category) / names.length < rounds) {
@@ -170,7 +223,11 @@
                 return;
             }
             Game.timeout = Number($('timeout-id').value);
-            scheduler.init(rounds, players);
+            scheduler.init(rounds, players, {
+                shuffleCategories: $('shuffle-categories').checked,
+                shufflePlayers: $('shuffle-players').checked,
+                mergeCategories: $('merge-categories').checked
+            });
             fadeOut($('app'), function() {
                 window.location.hash = '#game';
             });

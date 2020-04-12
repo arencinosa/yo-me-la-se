@@ -9,7 +9,7 @@ function initGameData(callback) {
     .then((json) => {
         var gd = {};
         Object.keys(json).forEach(cat => {
-            var qs = json[cat].filter(x => x.p != null && x.p != "");
+            var qs = json[cat].filter(x => x.question != null && x.question != "");
             if (qs.length > 0) {
                 gd[cat] = shuffle(qs);
             }
@@ -40,7 +40,9 @@ class GameStats extends GenericEventHandler {
         this.trigger(GameStats.STATS_CHANGED_EVENT, {
             instance: this,
             event: GameStats.STATS_CHANGED_EVENT,
-            causedBy: this.newWrongAnswer.name
+            causedBy: this.newWrongAnswer.name,
+            oldValue: this.wrongAnswers-1,
+            newValue: this.wrongAnswers
         });
     }
 
@@ -49,7 +51,9 @@ class GameStats extends GenericEventHandler {
         this.trigger(GameStats.STATS_CHANGED_EVENT, {
             instance: this,
             event: GameStats.STATS_CHANGED_EVENT,
-            causedBy: this.newCorrectAnswer.name
+            causedBy: this.newCorrectAnswer.name,
+            oldValue: this.correctAnswers-1,
+            newValue: this.correctAnswers
         });
     }
 }
@@ -105,8 +109,18 @@ class Game {
         return this.currentQuiz();
     }
 
+    reScheduleQuiz() {
+        var maxIndex = Game._data[this.currentCategory].length - 1;
+        if (this.currentIndex == maxIndex) {
+            return false;
+        }
+        var i = randInt(this.currentIndex+1, maxIndex);
+        swap(Game._data[this.currentCategory], this.currentIndex, i);
+        return true;
+    }
+
     checkAnswer(answer, gameStats=null) {
-        if (answer == this.currentQuiz().o[0]) {
+        if (answer == this.currentQuiz().options[0]) {
             if (gameStats) {
                 gameStats.newCorrectAnswer();
             }

@@ -3,6 +3,16 @@
 
 ---
 ## BUGS
+* [[link](https://github.com/arencinosa/yo-me-la-se/issues/32)] Hacer más _responsive_ el diseño
+
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/31)] Desactivar una categoría no ignora los jugadores declarados~~
+
+  ~~Se están teniendo en cuenta los jugadores declarados en una categoría aún si se desactiva (la categoría. Entonces:~~
+
+  * ~~o bien se borran al desactivar (o antes de activar);~~
+  * ~~o bien se ignoran durante el proceso de configuración.~~
+
+
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/1)] Si se le hace `click` a un botón en medio de un `fade` se cae en una especie de ciclo infinito de opacidad.~~
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/2)] No se actualiza el nombre del jugador si se cambia durante el juego (al menos, al jugador actual)~~
@@ -13,6 +23,11 @@
 
 ---
 ## Por hacer
+
+* Configurar la cantidad de opciones disponibles por cada pregunta
+
+  Esto se puede usar para regular el nivel de dificultad del juego, disminuyendo la probabilidad de acertar si no se tiene certeza sobre la respuesta.
+
 * ~~Usar las preguntas de la categoría `*` (random >= 0.7?)~~
 
   ~~La idea es usarlas como comodín, para cualquier categoría/nivel.~~
@@ -55,7 +70,41 @@
 ---
 ## Por mejorar
 
-* Utilizar los eventos del cronómetro en vez de usar `setTimeout` en  `games.js`
+* Darle el foco al _textarea_ de los jugadores al activar una categoría
+
+* ~~Permitir "posponer" una pregunta~~
+
+  ~~Quizás ya le salió a ese jugador, o quizás fue él mismo quien la propuso (o peor, no es una pregunta acorde a la persona, como pedirle a un daltónico que diferencie colores).~~
+
+* Crear un ícono
+
+* Crear "secciones" en las conclusiones, algo como "Excelente", "Muy bien", "Mejorable", "¿Dormido?", ...
+
+* Cambiar la forma en que se manejan los errores del "_setup_"
+
+  Ahora mismo hay un `alert` y un estilo de bordes rojos, pero no hay más mensajes explicativos.
+
+* ~~El texto de cantidad de preguntas por categoría no es parte del label del _switch_~~
+
+  ~~...y por tanto, no se puede dar _click_ encima para activar/desactivar el _switch_~~
+
+* Hacer una clase "Jugador"
+
+* ~~Cambiar las llaves del JSON de entrada~~
+
+  ~~Eso de `p` y `o` no se explica mucho.~~
+
+* ~~Dar la opción de aleatorizar o no el orden de los jugadores~~
+
+  ~~Varios niveles aquí:~~
+
+  * ~~Aleatorizar el orden de las categorías~~
+
+  * ~~Aleatorizar el orden de los jugadores dentro de las categorías~~
+
+  * ~~Permitir intercalar jugadores de diferentes categorías~~
+
+* Utilizar los eventos del cronómetro en vez de usar `setTimeout`
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/4)] Que el resumen quepa en la pantalla~~
 
@@ -63,9 +112,9 @@
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/5)] Cambiar el `alert` del final del juego por algo más _user-friendly_
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/14)] Que el tiempo que va quedando cambie de color
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/14)] Que el tiempo que va quedando cambie de color~~
 
-  Que vaya de verde a rojo, según se vaya agotando el tiempo
+  ~~Que vaya de verde a rojo, según se vaya agotando el tiempo~~
 
 * [[link](https://github.com/arencinosa/yo-me-la-se/issues/15)] Dar más estadísticas de tiempo
 
@@ -146,7 +195,7 @@
 
     ...para dar méritos a quien sugirió la pregunta (o para hacerlo responsable :P)
 
-* [[link](https://github.com/arencinosa/yo-me-la-se/issues/23)] Dejar saber cuántas preguntas por categorías hay
+* ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/23)] Dejar saber cuántas preguntas por categorías hay~~
 
 * ~~[[link](https://github.com/arencinosa/yo-me-la-se/issues/24)] Cambiar los _sliders_ del "_setup_" por (digamos) _textareas_~~
 
@@ -168,6 +217,8 @@
 * Seguir avanzando hasta equivocarse
 
    Sería hacer que el turno terminara sólo al equivocarnos.
+
+* Responder todas las preguntas que se pueda en un tiempo límite
 
 ---
 ## Comentarios

@@ -28,12 +28,19 @@ function insertHTML(html, dest, append=false){
     return true;
 }
 
+function randInt(min, max) {
+    return min + Math.floor(Math.random() * (max - min + 1))
+}
+
+function swap(arr, i, j) {
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
 function shuffle(arr) {
     for (var i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        var j = randInt(0, i);
+        swap(arr, i, j);
     }
     // ...I know, I did it in-place,
     // but returning the same array
@@ -106,4 +113,24 @@ function fadeOut(elem, callback=null) {
             callback();
         }
     });
+}
+
+function pluralize(amount, singular, plural=null) {
+    if (amount == 1) {
+        return amount + ' ' + singular;
+    }
+    if (plural) {
+        return amount + ' ' + plural;
+    }
+    var ending = 's';
+    if (singular.substr(-1) == 's') {
+        ending = 'es';
+    }
+    return amount + ' ' + singular + ending;
+}
+
+function activateClassName(elem, className) {
+    elem.classList.remove(className);
+    void elem.offsetWidth;
+    elem.classList.add(className);
 }
