@@ -35,6 +35,8 @@ class Scheduler {
             this.games[player.category].players = [ player ];
         });
         this.rounds = rounds;
+        this.totalRounds = rounds;
+
         var categories = Object.keys(this.games).filter(x => x != '*');
         categories.forEach(cat => {
             if (cat == Game.WILDCARD_CATEGORY) {
@@ -129,6 +131,14 @@ class Scheduler {
             }
         }
         return null;
+    }
+
+    getTotalRounds() {
+        return this.totalRounds;
+    }
+
+    getTotalPlayers(){
+        return this.players.length;
     }
 
     reScheduleQuiz() {

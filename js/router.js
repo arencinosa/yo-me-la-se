@@ -1,13 +1,13 @@
 'use strict';
 
 class Router {
-    constructor(routes) {
+    constructor(routes, rootElem) {
         if(!routes) {
             throw 'error: routes param is mandatory';
         }
 
         this.routes = routes;
-        this.rootElem = document.getElementById('app');
+        this.rootElem = rootElem;
         
         this.init();
     }

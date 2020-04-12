@@ -118,6 +118,7 @@
                 igp.appendChild(span);
 
                 var it = document.createElement('input');
+                it.id = conf.id + '-text';
                 it.className = 'form-control';
                 it.type = 'text';
                 it.setAttribute('aria-describedby', span.id);
@@ -192,7 +193,7 @@
         }
 
         function setup() {
-            $('rounds-id').classList.remove('error');
+            $('rounds-text').classList.remove('error');
             var rounds = Number($('rounds-id').value);
             var textareas = $('players-conf').getElementsByTagName('textarea');
             var players = [];
@@ -206,7 +207,7 @@
                 var category = elem.getAttribute('data-category');
                 var names = elem.value.split(/\n/).filter(n => n.length > 0);
                 if (Game.getQuizzesAmount(category) / names.length < rounds) {
-                    $('rounds-id').classList.add('error');
+                    $('rounds-text').classList.add('error');
                     elem.classList.add('error');
                     errors = true;
                 }
