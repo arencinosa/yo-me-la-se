@@ -159,6 +159,16 @@
 #wrong.stat-value {
     color: #dc3545;
 }
+.stat-value.scored {
+    animation-duration: 0.7s;
+    animation-name: scored;
+}
+@keyframes scored {
+    to {
+        opacity: 0;
+        font-size: large;
+    }
+}
 
 #timer {
     position: absolute;

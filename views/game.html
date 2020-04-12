@@ -103,9 +103,7 @@
         }
         function resetTimer() {
             $('timer').style.animationPlayState = 'paused';
-            $('timer').classList.remove('animated');
-            void $('timer').offsetWidth;
-            $('timer').classList.add('animated');
+            activateClassName($('timer'), 'animated');
         }
         function pauseTimer() {
             $('timer').style.animationPlayState = 'paused';
@@ -132,12 +130,35 @@
             $('next-btn').classList.remove('d-none');
         }
 
-        function updateBoardStats(e=null) {
+        function updateBoardStats(statEvent=null) {
+            function _updateValue() {
+                updatedElem.textContent = statEvent.newValue;
+                updatedElem.removeEventListener('animationend', _updateValue);
+            }
+            
             var player = scheduler.currentPlayer();
-            if (!e || e.instance == player.stats) {
+            if (!statEvent) {
                 $('right').textContent = player.stats.correctAnswers;
                 $('wrong').textContent = player.stats.wrongAnswers;
+                return;
             }
+            
+            if (statEvent.instance != player.stats) {
+                return;
+            }
+
+            var updatedElem = null;
+            switch (statEvent.causedBy) {
+                case statEvent.instance.newWrongAnswer.name:
+                    updatedElem = $('wrong');
+                    break;
+                case statEvent.instance.newCorrectAnswer.name:
+                    updatedElem = $('right');
+                    break;
+            }
+
+            updatedElem.addEventListener('animationend', _updateValue);
+            activateClassName(updatedElem, 'scored');
         }
         function showOptions() {
             $('show-options').classList.add('d-none');

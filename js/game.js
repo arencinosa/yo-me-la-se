@@ -40,7 +40,9 @@ class GameStats extends GenericEventHandler {
         this.trigger(GameStats.STATS_CHANGED_EVENT, {
             instance: this,
             event: GameStats.STATS_CHANGED_EVENT,
-            causedBy: this.newWrongAnswer.name
+            causedBy: this.newWrongAnswer.name,
+            oldValue: this.wrongAnswers-1,
+            newValue: this.wrongAnswers
         });
     }
 
@@ -49,7 +51,9 @@ class GameStats extends GenericEventHandler {
         this.trigger(GameStats.STATS_CHANGED_EVENT, {
             instance: this,
             event: GameStats.STATS_CHANGED_EVENT,
-            causedBy: this.newCorrectAnswer.name
+            causedBy: this.newCorrectAnswer.name,
+            oldValue: this.correctAnswers-1,
+            newValue: this.correctAnswers
         });
     }
 }

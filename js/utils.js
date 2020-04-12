@@ -125,3 +125,9 @@ function pluralize(amount, singular, plural=null) {
     }
     return amount + ' ' + singular + ending;
 }
+
+function activateClassName(elem, className) {
+    elem.classList.remove(className);
+    void elem.offsetWidth;
+    elem.classList.add(className);
+}
