@@ -32,12 +32,15 @@ function randInt(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1))
 }
 
+function swap(arr, i, j) {
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
 function shuffle(arr) {
     for (var i = arr.length - 1; i > 0; i--) {
         var j = randInt(0, i);
-        var temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        swap(arr, i, j);
     }
     // ...I know, I did it in-place,
     // but returning the same array

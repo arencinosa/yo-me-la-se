@@ -109,6 +109,16 @@ class Game {
         return this.currentQuiz();
     }
 
+    reScheduleQuiz() {
+        var maxIndex = Game._data[this.currentCategory].length - 1;
+        if (this.currentIndex == maxIndex) {
+            return false;
+        }
+        var i = randInt(this.currentIndex+1, maxIndex);
+        swap(Game._data[this.currentCategory], this.currentIndex, i);
+        return true;
+    }
+
     checkAnswer(answer, gameStats=null) {
         if (answer == this.currentQuiz().options[0]) {
             if (gameStats) {

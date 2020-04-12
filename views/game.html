@@ -46,7 +46,8 @@
                 <p id="question" class="lead"></p>
                 <hr class="my-4"/>
                 <div id="show-options">
-                    <button type="button" class="btn btn-primary" onclick="showOptions()">Mostrar opciones</button>
+                    <button type="button" class="btn btn-primary" onclick="showOptions()">¿Listo(a)?</button>
+                    <button type="button" class="btn btn-light" style="float: right;" onclick="changeQuiz()">Cambiar la pregunta</button>
                 </div>
                 <div id="options" class="d-none"></div>
             </div>
@@ -165,6 +166,13 @@
             $('options').classList.remove('d-none');
             startTimer();
         }
+        function changeQuiz() {
+            if (scheduler.reScheduleQuiz()) {
+                updateQuiz(scheduler.currentGame().currentQuiz());
+                return true;
+            }
+            return false;
+        }
         function checkResponse(btn) {
             pauseTimer();
 
@@ -196,27 +204,40 @@
                 return;
             }
             var quiz = status.quiz;
+            var player = scheduler.currentPlayer();
+            // this is not the right way to proceed
+            // but given that we don't have user
+            // profiles so far...
+            if (quiz.thanksTo
+                    && quiz.thanksTo == player.name
+                    && scheduler.reScheduleQuiz()) {
+                console.log('re-scheduling quiz for current player');
+                quiz = scheduler.currentGame().currentQuiz();
+            }
 
             $('show-options').classList.remove('d-none');
             $('options').classList.add('d-none');
 
-            var playersList = document.getElementsByClassName('player');
-            for (var i = 0; i < playersList.length; i++) {
-                var player = playersList[i];
+            var playerBadgesList = document.getElementsByClassName('player badge');
+            for (var i = 0; i < playerBadgesList.length; i++) {
+                var playerBadge = playerBadgesList[i];
                 if (i == scheduler.currentPlayerIndex()) {
-                    player.classList.add('active');
-                    player.classList.remove('badge-light');
-                    player.classList.add('badge-secondary');
+                    playerBadge.classList.add('active');
+                    playerBadge.classList.remove('badge-light');
+                    playerBadge.classList.add('badge-secondary');
                 } else {
-                    player.classList.remove('active');
-                    player.classList.remove('badge-secondary');
-                    player.classList.add('badge-light');
+                    playerBadge.classList.remove('active');
+                    playerBadge.classList.remove('badge-secondary');
+                    playerBadge.classList.add('badge-light');
                 }
             }
-            var player = scheduler.currentPlayer();
             $('player-name').textContent = player.name;
             updateBoardStats();
 
+            updateQuiz(quiz);
+            resetTimer();
+        }
+        function updateQuiz(quiz) {
             $('question').innerHTML = quiz.question;
             $('options').innerHTML = '';
             var columnWidth = Math.floor(12 / quiz.options.length) - 1;
@@ -241,7 +262,6 @@
 
                 row.appendChild(col);
             }
-            resetTimer();
         }
 
         function start() {

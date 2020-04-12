@@ -72,9 +72,9 @@
 
 * Darle el foco al _textarea_ de los jugadores al activar una categoría
 
-* Permitir "posponer" una pregunta
+* ~~Permitir "posponer" una pregunta~~
 
-  Quizás ya le salió a ese jugador, o quizás fue él mismo quien la propuso (o peor, no es una pregunta acorde a la persona, como pedirle a un daltónico que diferencie colores).
+  ~~Quizás ya le salió a ese jugador, o quizás fue él mismo quien la propuso (o peor, no es una pregunta acorde a la persona, como pedirle a un daltónico que diferencie colores).~~
 
 * Crear un ícono
 

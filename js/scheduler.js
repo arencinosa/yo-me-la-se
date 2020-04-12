@@ -131,6 +131,21 @@ class Scheduler {
         return null;
     }
 
+    reScheduleQuiz() {
+        if (this.currentGame().reScheduleQuiz()) {
+            return true;
+        }
+        var g = (this.wildcardTurn)
+                    ? this.games[this.currentPlayer().category]
+                    : this.wildcardGame;
+        if (g.reScheduleQuiz()) {
+            this.wildcardTurn = !this.wildcardTurn;
+            return true;
+        }
+
+        return false;
+    }
+
     currentPlayer() {
         return this.players[this.currentIndex];
     }
