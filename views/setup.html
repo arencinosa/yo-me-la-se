@@ -68,6 +68,7 @@
                 var collapsable = document.createElement('div');
                 collapsable.className = 'collapse';
                 collapsable.id = idifiedCategory+'-names';
+                jQuery(collapsable).on('shown.bs.collapse', textareaFocus);
                 container.appendChild(collapsable);
 
                 var textarea = document.createElement('textarea');
@@ -185,13 +186,15 @@
             });
             $('rounds-conf').appendChild(groupContainer);
 
-
             if (Number(getComputedStyle($('app')).opacity) != 1) {
                 // fadeIn($('app'));
                 $('app').style.opacity = 1;
             }
         }
-
+        function textareaFocus(e) {
+            var textarea = e.target.firstChild;
+            textarea.focus();
+        }
         function setup() {
             $('rounds-text').classList.remove('error');
             var rounds = Number($('rounds-id').value);
