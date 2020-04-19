@@ -115,10 +115,6 @@
             var totalRounds = scheduler.getTotalRounds();
             var progressBarLength = widthProgressBar(totalRounds);
 
-            //alert(progressBarLength);
-
-            roundCount = 0;
-
             $('rounds-counter').textContent = "Ronda 1 de " + totalRounds;
 
             for(var i = 0; i < totalRounds; i++) {
@@ -150,25 +146,19 @@
             var playerIndex = scheduler.currentPlayerIndex();
             var totalPlayers = scheduler.getTotalPlayers();
             var totalRounds = scheduler.getTotalRounds();
+            var currentRound = scheduler.getCurrentRound();
 
-            // First player => new round
-            if(playerIndex == 0) {
-                roundCount ++;
-            }
-            // $('progress-container-0').style['background-color'] = "#28a745";
-            $('rounds-counter').textContent = "Ronda " + roundCount + " de " + totalRounds;
+            $('rounds-counter').textContent = "Ronda " + currentRound + " de " + totalRounds;
 
             // Fill rounds done
-            for(var i = 0; i < roundCount - 1; i++) {
+            for(var i = 0; i < currentRound - 1; i++) {
                 $('progress-bar-' + i).style['width'] = '100%';
             }
 
             // Fill current round
-            var pos = roundCount - 1;
+            var pos = currentRound - 1;
             var progress_bar_id = 'progress-bar-' + pos;
             $(progress_bar_id).style['width'] = (((playerIndex + 1) * 100) / totalPlayers ) + '%';
-
-            // $('progress-bar-0').style['height'] = '100%';
 
             // Show the hidden <div> with id='rounds'
             if (Number(getComputedStyle($('rounds')).opacity) != 1) {

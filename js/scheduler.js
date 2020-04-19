@@ -133,6 +133,10 @@ class Scheduler {
         return null;
     }
 
+    getCurrentRound() {
+        return this.totalRounds - this.rounds + 1;
+    }
+
     getTotalRounds() {
         return this.totalRounds;
     }
